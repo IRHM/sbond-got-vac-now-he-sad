@@ -12,7 +12,6 @@
     private function extactData($url){
       // Get data not provided in xml copy
       $extractScreen = $this->extractScreen($url);
-
       $extractXml = $this->extractXml($url);
     }
 
@@ -20,14 +19,33 @@
       // Get xml data
       $url = "$url?xml=1";
       $xml = simplexml_load_file($url);
-      // print_r($xml);
+
+      // Specific xml data
+      if(isset($xml) && !empty($xml)){
+        $steamID64 = (int) $xml->steamID64;
+        $username = (string) $xml->steamID;
+        $realName = (string) $xml->realname;
+        $customURL = (string) "https://steamcommunity.com/id/$xml->customURL";
+        $memberSince = (string) $xml->memberSince;
+
+        return array(
+          'steamID64' => $steamID64,
+          'username' => $username,
+          'realName' => $realName,
+          'customURL' => $customURL,
+          'memberSince' => $memberSince,
+        );
+      }
+      else{
+        return array('err' => 'error getting xml data');
+      }
     }
 
     private function extractScreen($url){
       // Get site data
       $html = file_get_contents($url);
 
-      // Hide bad html errors
+      // Hide html errors
       libxml_use_internal_errors(true);
 
       $doc = new DOMDocument;

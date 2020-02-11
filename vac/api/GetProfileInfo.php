@@ -6,13 +6,15 @@
 
   class GetProfileInfo{
     public function data(){
-      $this->extactData('https://steamcommunity.com/id/idontknowplshelp/');
+      return $this->extactData('https://steamcommunity.com/id/idontknowplshelp/');
     }
 
     private function extactData($url){
       // Get data not provided in xml copy
       $extractScreen = $this->extractScreen($url);
       $extractXml = $this->extractXml($url);
+
+      return array($extractScreen, $extractXml);
     }
 
     private function extractXml($url){

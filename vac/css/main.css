@@ -1,0 +1,88 @@
+/*--- DEFAULTS ---*/
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+/*-- USER CONTAINER ---*/
+
+.userHeadContainer{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 15px 15%;
+}
+
+.userHeadContainer .wrapper{
+  background-color: black;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.userHeadContainer .wrapper .profilePicture img{
+  float: left;
+  width: 164px;
+  margin-right: 10px;
+}
+
+.userHeadContainer .data{
+  flex-flow: column wrap;
+  align-content: space-between;
+  justify-content: space-between;
+}
+
+.userHeadContainer .data span{
+  display: inline-block;
+  color: white;
+  padding: 0 0 5px 0;
+}
+
+.userHeadContainer .data #username{
+  font-size: 28px;
+}
+
+.userHeadContainer .data #country img{
+  display: inline;
+  vertical-align: middle;
+  width: 16px;
+  margin-right: 5px;
+}
+
+/*--- COUNTER ---*/
+
+.counterContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.counterContainer .counter{
+
+}
+
+.counterContainer .counter div{
+  display: inline-block;
+  margin: 25px 50px;
+}
+
+.counterContainer .counter div span{
+
+}
+
+.counterContainer .counter div span:nth-child(1){
+  display: block;
+  font-size: 100px;
+  color: darkred;
+}
+
+.counterContainer .counter div span:nth-child(2){
+  font-weight: bold;
+}

@@ -10,11 +10,11 @@
     }
 
     private function extactData($url){
-      // Get data not provided in xml copy
-      $extractScreen = $this->extractScreen($url);
+      // Get extracted data from both methods
       $extractXml = $this->extractXml($url);
+      $extractScreen = $this->extractScreen($url);
 
-      return array($extractScreen, $extractXml);
+      return array($extractXml, $extractScreen);
     }
 
     private function extractXml($url){
@@ -24,18 +24,28 @@
 
       // Specific xml data
       if(isset($xml) && !empty($xml)){
+        // Select data
         $steamID64 = (int) $xml->steamID64;
+        $customURL = (string) "https://steamcommunity.com/id/$xml->customURL";
         $username = (string) $xml->steamID;
         $realName = (string) $xml->realname;
-        $customURL = (string) "https://steamcommunity.com/id/$xml->customURL";
         $memberSince = (string) $xml->memberSince;
+        $avatar = (string) $xml->avatarFull;
+        $location = (string) $xml->location;
+        $status = (string) $xml->onlineState;
+        $vacStatus = (int) $xml->vacBanned;
 
+        // Return selected data in array
         return array(
           'steamID64' => $steamID64,
+          'customURL' => $customURL,
           'username' => $username,
           'realName' => $realName,
-          'customURL' => $customURL,
           'memberSince' => $memberSince,
+          'avatar' => $avatar,
+          'location' => $location,
+          'status' => $status,
+          'vacStatus' => $vacStatus
         );
       }
       else{
@@ -56,11 +66,17 @@
 
       // Get specific elements value from xpath
       if(isset($xpath)){
+        // Get ban info from page
         $banInfo = $xpath->query('/html/body/div[1]/div[7]/div[3]/div[1]/div[2]/div/div[1]/div[1]/div[2]')->item(0);
+
+        // Remove 'Info' and remove unnecessary spaces
         $banFullMsg = str_replace('Info', '', $banInfo->textContent);
+        $banFullMsg = trim(preg_replace('/\s+/', ' ', $banFullMsg));
+
+        // Get days on ban in seperate var
         $banDays = (int) filter_var($banFullMsg, FILTER_SANITIZE_NUMBER_INT);
 
-        return array('ban' => array('fullMsg' => $banFullMsg, 'time' => $banDays));
+        return array('banFullMsg' => $banFullMsg, 'banDays' => $banDays);
       }
 
       return array('err' => 'error getting specific info');

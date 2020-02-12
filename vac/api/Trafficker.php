@@ -24,13 +24,15 @@
       if(isset($args['return'])){
         $val = $args['return'];
 
-        if($val == "getProfileInfo"){
-          require_once($_SERVER['DOCUMENT_ROOT'] . '/api/GetProfileInfo.php');
-
-          $getProfileInfo = new GetProfileInfo();
-          // $getProfileInfo->data();
-
-          $this->sendMsg('msg', $getProfileInfo->data());
+        switch($val){
+          case "getProfileInfo":
+            require_once($_SERVER['DOCUMENT_ROOT'] . '/api/GetProfileInfo.php');
+            $getProfileInfo = new GetProfileInfo();
+            $this->sendMsg('msg', $getProfileInfo->data());
+            break;
+          default:
+            $this->sendMsg('err', 'nothing to return');
+            break;
         }
       }
     }

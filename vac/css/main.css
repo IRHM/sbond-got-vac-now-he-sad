@@ -24,6 +24,7 @@ body{
   background-color: black;
   padding: 8px;
   border-radius: 8px;
+  width: 500px;
 }
 
 .userHeadContainer .wrapper .profilePicture img{
@@ -39,7 +40,7 @@ body{
 }
 
 .userHeadContainer .data span{
-  display: inline-block;
+  display: block;
   color: white;
   padding: 0 0 5px 0;
 }

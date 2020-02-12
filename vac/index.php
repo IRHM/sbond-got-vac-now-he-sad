@@ -26,7 +26,7 @@
           <img src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/13/1322e6f5b9a8a9891e75814653d55027854ff064_full.jpg" alt="">
         </div>
         <div class="data">
-          <span id="username">sbondo1234</span>
+          <span id="username">Get</span>
           <span id="desc">Mighty kille of cs game ever the third</span>
           <span id="country"><img src="https://steamcommunity-a.akamaihd.net/public/images/countryflags/rs.gif" alt="">Serbia</span>
         </div>

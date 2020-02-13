@@ -13,8 +13,9 @@
       // Get extracted data from both methods
       $extractXml = $this->extractXml($url);
       $extractScreen = $this->extractScreen($url);
+      $allData = array_merge($extractXml, $extractScreen);
 
-      return array($extractXml, $extractScreen);
+      return array($allData);
     }
 
     private function extractXml($url){
@@ -32,6 +33,7 @@
         $memberSince = (string) $xml->memberSince;
         $avatar = (string) $xml->avatarFull;
         $location = (string) $xml->location;
+        $description = (string) $xml->summary;
         $status = (string) $xml->onlineState;
         $vacStatus = (int) $xml->vacBanned;
 
@@ -44,6 +46,7 @@
           'memberSince' => $memberSince,
           'avatar' => $avatar,
           'location' => $location,
+          'description' => $description,
           'status' => $status,
           'vacStatus' => $vacStatus
         );
@@ -76,7 +79,15 @@
         // Get days on ban in seperate var
         $banDays = (int) filter_var($banFullMsg, FILTER_SANITIZE_NUMBER_INT);
 
-        return array('banFullMsg' => $banFullMsg, 'banDays' => $banDays);
+        // Get location image
+        $locationImg = $xpath->query("/html/body/div[1]/div[7]/div[3]/div[1]/div[1]/div/div/div/div[1]/div[2]/img")->item(0);
+        $locationImg = $locationImg->attributes->getNamedItem('src')->nodeValue;
+
+        return array(
+          'banFullMsg' => $banFullMsg,
+          'banDays' => $banDays,
+          'locationImg' => $locationImg
+        );
       }
 
       return array('err' => 'error getting specific info');

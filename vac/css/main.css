@@ -45,15 +45,26 @@ body{
   padding: 0 0 5px 0;
 }
 
+.userHeadContainer .data span{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 .userHeadContainer .data #username{
   font-size: 28px;
 }
 
-.userHeadContainer .data #country img{
+.userHeadContainer .data .locationWrap img{
   display: inline;
   vertical-align: middle;
   width: 16px;
-  margin-right: 5px;
+  margin-right: 1px;
+}
+
+.userHeadContainer .data .locationWrap span{
+  display: inline;
 }
 
 /*--- COUNTER ---*/

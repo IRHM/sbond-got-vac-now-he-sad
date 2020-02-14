@@ -33,7 +33,7 @@
         $memberSince = (string) $xml->memberSince;
         $avatar = (string) $xml->avatarFull;
         $location = (string) $xml->location;
-        $description = (string) $xml->summary;
+        $description = str_replace('https://steamcommunity.com/linkfilter/?url=', '', (string) $xml->summary);
         $status = (string) $xml->onlineState;
         $vacStatus = (int) $xml->vacBanned;
 

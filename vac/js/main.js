@@ -44,8 +44,10 @@ async function makeCountdown(banDays){
     return new Date(this.valueOf()+864E5*d);
   };
 
+  banDaysLeft = 2556 - banDays;
+
   // Get date when ban is over
-  var cdDate = new Date().addDays(banDays);
+  var cdDate = new Date().addDays(banDaysLeft);
 
   // Remove hours, mins, seconds and milliseconds
   var cdDate = new Date(cdDate.getFullYear(), cdDate.getMonth(), cdDate.getDate(), 0, 0, 0, 0);

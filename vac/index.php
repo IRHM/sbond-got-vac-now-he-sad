@@ -29,7 +29,7 @@
           <span id="username">Getting username</span>
           <span id="desc">Getting bio</span>
           <div class="locationWrap">
-            <img id="locImg" src="https://steamcommunity-a.akamaihd.net/public/images/countryflags/rs.gif" alt="">
+            <img id="locImg" src="" alt="">
             <span id="loc">Getting Location</span>
           </div>
 
@@ -38,18 +38,22 @@
     </div>
 
     <div class="counterContainer">
-      <div class="counter">
+      <div id="counter" class="counter">
         <div id="day">
-          <span>630</span>
+          <span></span>
           <span>Days</span>
         </div>
         <div id="hour">
-          <span>23</span>
+          <span></span>
           <span>Hours</span>
         </div>
         <div id="minute">
-          <span>51</span>
+          <span></span>
           <span>Minutes</span>
+        </div>
+        <div id="second">
+          <span></span>
+          <span>Seconds</span>
         </div>
       </div>
     </div>

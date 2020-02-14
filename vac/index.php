@@ -16,8 +16,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>sbondVac</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.png">
+    <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.svg">
   </head>
   <body>
     <div class="userHeadContainer">
@@ -32,7 +35,6 @@
             <img id="locImg" src="" alt="">
             <span id="loc">Getting Location</span>
           </div>
-
         </div>
       </div>
     </div>

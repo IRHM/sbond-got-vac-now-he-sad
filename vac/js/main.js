@@ -29,7 +29,7 @@ async function getProfileInfo(){
       // Update profile UI elements
       ui_avatar.src = msg.avatar;
       ui_username.textContent = msg.username;
-      ui_desc.textContent = msg.description;
+      ui_desc.innerHTML = msg.description;
       ui_loc.textContent = msg.location;
       ui_locImg.src = msg.locationImg;
 

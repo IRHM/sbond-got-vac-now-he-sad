@@ -12,7 +12,7 @@
     private function extactData($url){
       // Get extracted data from both methods
       $extractXml = $this->extractXml($url);
-      $extractScreen = $this->extractScreen($url);
+      $extractScreen = $this->extractScreen($extractXml['vacStatus'], $url);
       $allData = array_merge($extractXml, $extractScreen);
 
       return array($allData);
@@ -33,7 +33,18 @@
         $memberSince = (string) $xml->memberSince;
         $avatar = (string) $xml->avatarFull;
         $location = (string) $xml->location;
-        $description = str_replace('https://steamcommunity.com/linkfilter/?url=', '', (string) $xml->summary);
+        $description = strip_tags(
+          // Only allow certain html tags and replace div with span
+          str_replace(
+            'https://steamcommunity.com/linkfilter/?url=',
+            '',
+            str_replace(
+              'div',
+              'span',
+              (string) $xml->summary)
+          ),
+          '<br><b><u><i><a><span>'
+        );
         $status = (string) $xml->onlineState;
         $vacStatus = (int) $xml->vacBanned;
 
@@ -56,7 +67,7 @@
       }
     }
 
-    private function extractScreen($url){
+    private function extractScreen($vacStatus, $url){
       // Get site data
       $html = file_get_contents($url);
 
@@ -69,19 +80,27 @@
 
       // Get specific elements value from xpath
       if(isset($xpath)){
-        // Get ban info from page
-        $banInfo = $xpath->query('/html/body/div[1]/div[7]/div[3]/div[1]/div[2]/div/div[1]/div[1]/div[2]')->item(0);
-
-        // Remove 'Info' and remove unnecessary spaces
-        $banFullMsg = str_replace('Info', '', $banInfo->textContent);
-        $banFullMsg = trim(preg_replace('/\s+/', ' ', $banFullMsg));
-
-        // Get days on ban in seperate var
-        $banDays = (int) filter_var($banFullMsg, FILTER_SANITIZE_NUMBER_INT);
+        $banFullMsg = 0;
+        $banDays = 0;
 
         // Get location image
         $locationImg = $xpath->query("/html/body/div[1]/div[7]/div[3]/div[1]/div[1]/div/div/div/div[1]/div[2]/img")->item(0);
-        $locationImg = $locationImg->attributes->getNamedItem('src')->nodeValue;
+
+        if(isset($locationImg) && !empty($locationImg)){
+          $locationImg = $locationImg->attributes->getNamedItem('src')->nodeValue;
+        }
+
+        // Get ban info from page if vacced
+        if($vacStatus){
+          $banInfo = $xpath->query('/html/body/div[1]/div[7]/div[3]/div[1]/div[2]/div/div[1]/div[1]/div[2]')->item(0);
+
+          // Remove 'Info' and remove unnecessary spaces
+          $banFullMsg = str_replace('Info', '', $banInfo->textContent);
+          $banFullMsg = trim(preg_replace('/\s+/', ' ', $banFullMsg));
+
+          // Get days on ban in seperate var
+          $banDays = (int) filter_var($banFullMsg, FILTER_SANITIZE_NUMBER_INT);
+        }
 
         return array(
           'banFullMsg' => $banFullMsg,

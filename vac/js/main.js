@@ -33,8 +33,13 @@ async function getProfileInfo(){
       ui_loc.textContent = msg.location;
       ui_locImg.src = msg.locationImg;
 
-      // Set countdown to days on users ban
-      makeCountdown(msg.banDays);
+      if(msg.vacStatus){
+        // Set countdown to days on users ban
+        makeCountdown(msg.banDays);
+      }
+      else{
+        // User not vacced so dont show countdown
+      }
     }
   });
 }

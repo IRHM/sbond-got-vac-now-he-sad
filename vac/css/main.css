@@ -96,3 +96,34 @@ body{
 .counterContainer .counter div span:nth-child(2){
   font-weight: bold;
 }
+
+/*--- STEAM STYLES ---*/
+
+.bb_h1{
+  font-size: 20px;
+}
+
+.bb_link{
+  color: #ebebeb;
+  text-decoration: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.bb_link:hover{
+  color: #5aa9d6;
+}
+
+.bb_spoiler{
+  padding: 3px;
+  background-color: black;
+  color: black;
+}
+
+.bb_spoiler:hover{
+  color: white;
+}
+
+.bb_strike{
+  text-decoration: line-through;
+}

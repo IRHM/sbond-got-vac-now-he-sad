@@ -8,6 +8,7 @@ var ui_days = document.getElementById("day");
 var ui_hours = document.getElementById("hour");
 var ui_minutes = document.getElementById("minute");
 var ui_second = document.getElementById("second");
+var ui_noVac = document.getElementById("noVac");
 
 async function queryTrafficker(query){
   var response = await fetch('https://vac.sbond.co/api/trafficker.php', {
@@ -40,6 +41,8 @@ async function getProfileInfo(){
       }
       else{
         // User not vacced so dont show countdown
+        ui_counter.classList.add('hidden');
+        ui_noVac.classList.remove('hidden');
       }
     }
   });

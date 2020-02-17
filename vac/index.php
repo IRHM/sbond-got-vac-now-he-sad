@@ -58,6 +58,8 @@
           <span>Seconds</span>
         </div>
       </div>
+
+      <div id="noVac" class="hidden">NOT VAC BANNED</div>
     </div>
 
     <script src="js/main.js" type="text/javascript"></script>

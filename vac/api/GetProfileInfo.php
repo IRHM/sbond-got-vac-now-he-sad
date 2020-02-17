@@ -6,7 +6,7 @@
 
   class GetProfileInfo{
     public function data(){
-      return $this->extactData('https://steamcommunity.com/id/idontknowplshelp/');
+      return $this->extactData('https://steamcommunity.com/id/idontknowplshelp');
     }
 
     private function extactData($url){
@@ -90,6 +90,25 @@
           $locationImg = $locationImg->attributes->getNamedItem('src')->nodeValue;
         }
 
+        // Get background image
+        $backgroundImg = $xpath->query("/html/body/div[1]/div[7]/div[3]/div[1]")->item(0);
+
+        if(isset($backgroundImg) && !empty($backgroundImg)){
+          $backgroundImg = $backgroundImg->attributes->getNamedItem('style')->nodeValue;
+
+          // Check if element has background image has url
+          if(preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $backgroundImg, $match)){
+            $backgroundImg = $match[0][0];
+          }
+          else{
+            $backgroundImg = 0;
+          }
+        }
+        else{
+          // Background element not found
+          $backgroundImg = 0;
+        }
+
         // Get ban info from page if vacced
         if($vacStatus){
           $banInfo = $xpath->query('/html/body/div[1]/div[7]/div[3]/div[1]/div[2]/div/div[1]/div[1]/div[2]')->item(0);
@@ -101,11 +120,17 @@
           // Get days on ban in seperate var
           $banDays = (int) filter_var($banFullMsg, FILTER_SANITIZE_NUMBER_INT);
         }
+        else{
+          // Vac info element not found
+          $banFullMsg = 0;
+          $banDays = 0;
+        }
 
         return array(
           'banFullMsg' => $banFullMsg,
           'banDays' => $banDays,
-          'locationImg' => $locationImg
+          'locationImg' => $locationImg,
+          'backgroundImg' => $backgroundImg
         );
       }
 

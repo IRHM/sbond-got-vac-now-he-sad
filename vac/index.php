@@ -42,7 +42,7 @@
     <div class="counterContainer">
       <div id="counter" class="counter">
         <div id="day">
-          <span></span>
+          <span class="days"></span>
           <span>Days</span>
         </div>
         <div id="hour">

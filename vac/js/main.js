@@ -32,6 +32,7 @@ async function getProfileInfo(){
       ui_desc.innerHTML = msg.description;
       ui_loc.textContent = msg.location;
       ui_locImg.src = msg.locationImg;
+      document.body.style.backgroundImage = "url(" + msg.backgroundImg + ")";
 
       if(msg.vacStatus){
         // Set countdown to days on users ban

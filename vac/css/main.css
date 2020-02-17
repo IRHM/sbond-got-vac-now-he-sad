@@ -9,6 +9,10 @@
 body{
   font-family: sans-serif;
   text-rendering: optimizeLegibility;
+  background-image: url('');
+  background-position: 49.999% 0;
+  background-repeat: no-repeat;
+  background-color: #121212;
 }
 
 /*-- USER CONTAINER ---*/
@@ -21,10 +25,11 @@ body{
 }
 
 .userHeadContainer .wrapper{
-  background-color: black;
+  background-color: #ffffff05;
   padding: 8px;
   border-radius: 8px;
   width: 500px;
+  box-shadow: 0px 0px 10px #ffffff12;
 }
 
 .userHeadContainer .wrapper .profilePicture img{
@@ -41,7 +46,7 @@ body{
 
 .userHeadContainer .data span{
   display: block;
-  color: white;
+  color: #E4E4E5;
   padding: 0 0 5px 0;
 }
 
@@ -71,7 +76,6 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .counterContainer .counter{
@@ -84,17 +88,27 @@ body{
 }
 
 .counterContainer .counter div span{
+  transition: color 250ms ease;
+}
 
+.counterContainer .counter div span:not(.days){
+  width: 112px;
 }
 
 .counterContainer .counter div span:nth-child(1){
   display: block;
   font-size: 100px;
-  color: darkred;
+  color: #671ac4; /* darkred; */
+}
+
+.counterContainer .counter div:hover span{
+  transition: color 250ms ease;
+  color: #00d754 !important;
 }
 
 .counterContainer .counter div span:nth-child(2){
   font-weight: bold;
+  color: #008c37;
 }
 
 /*--- STEAM STYLES ---*/
@@ -111,7 +125,7 @@ body{
 }
 
 .bb_link:hover{
-  color: #5aa9d6;
+  color: #f456f9;
 }
 
 .bb_spoiler{

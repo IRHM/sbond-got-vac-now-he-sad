@@ -114,5 +114,3 @@ async function makeCountdown(banDays){
     }
   }, 1000);
 }
-
-// getProfileInfo();

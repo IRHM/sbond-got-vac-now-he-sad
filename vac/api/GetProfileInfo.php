@@ -10,7 +10,7 @@
         return $this->extactData("https://steamcommunity.com/profiles/$id");
       }
       else if($type == 'customURL'){
-        return $this->extactData("https://steamcommunity.com/id/$id");
+        return $this->extactData($id);
       }
       else{
         return array('err' => 'type not understood');

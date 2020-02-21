@@ -10,8 +10,10 @@
   </head>
   <body>
     <nav>
-      <input id="navSearch" type="search" name="" value="" placeholder="steamID">
-      <div class="icon" id="navIcon"></div>
+      <form id="steamIDForm">
+        <input id="navSearch" type="search" placeholder="steamID64">
+        <div class="icon" id="navIcon"></div>
+      </form>
     </nav>
 
     <div class="userHeadContainer">

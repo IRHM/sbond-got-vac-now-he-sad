@@ -9,10 +9,27 @@ var ui_hours = document.getElementById("hour");
 var ui_minutes = document.getElementById("minute");
 var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
+var ui_steamIDForm = document.getElementById("steamIDForm")
 
 // Search bar
 document.getElementById('navIcon').onclick = function(){
   document.getElementById('navSearch').classList.toggle('open');
+}
+
+ui_steamIDForm.onsubmit = function(){
+  event.preventDefault();
+
+  let searchBar = this['navSearch'];
+
+  if(searchBar.value != ""){
+    console.log("not empty");
+    queryTrafficker({ 'return':'getProfileInfo' }).then((response) => {
+      console.log(response);
+    });
+  }
+  else{
+    console.log("empty");
+  }
 }
 
 async function queryTrafficker(query){

@@ -35,6 +35,7 @@
               // if it doesn't resemble one cancel and send an error
               $steamID = $val[1];
 
+              // Detect type
               if(ctype_digit($steamID)){
                 // steamID64
                 $this->sendMsg('msg', $getProfileInfo->data('steamID64', $steamID));

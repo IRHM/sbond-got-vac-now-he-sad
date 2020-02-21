@@ -22,14 +22,15 @@ ui_steamIDForm.onsubmit = function(){
   let searchBar = this['navSearch'];
 
   if(searchBar.value != ""){
-    console.log("not empty");
+    // searchBar not empty - get profileInfo
     queryTrafficker({ 'return':['getProfileInfo', searchBar.value] }).then((response) => {
-      console.log(response);
+      // send response to drawProfileInfo to display it
       drawProfileInfo(response);
     });
   }
   else{
-    console.log("empty");
+    // searchBar empty
+
   }
 }
 

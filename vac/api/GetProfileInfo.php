@@ -5,7 +5,7 @@
   use DOMXpath;
 
   class GetProfileInfo{
-    public function data($type, $id){ //76561198172055451
+    public function data($type, $id){
       if($type == 'steamID64'){
         return $this->extactData("https://steamcommunity.com/profiles/$id");
       }

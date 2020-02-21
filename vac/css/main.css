@@ -15,6 +15,80 @@ body{
   background-color: #121212;
 }
 
+/*--- NAVBAR ---*/
+
+nav .icon{
+  position: absolute;
+  margin: auto;
+  top: 8px;
+  right: 1vw;
+  width: 50px;
+  height: 50px;
+  background: #671ac4;
+  border-radius: 50%;
+  transition: all 1s;
+  z-index: 999;
+}
+
+nav .icon:before{
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 15px;
+  right: 0;
+  bottom: 0;
+  left: 15px;
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  transform: rotate(45deg);
+  transition: all .5s;
+}
+
+nav .icon:after{
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: -5px;
+  right: 0;
+  bottom: 0;
+  left: -5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  transition: all .5s;
+}
+
+nav .icon:hover{
+  cursor: pointer;
+}
+
+nav input{
+  position: absolute;
+  right: 3.5vw;
+  top: 17px;
+  width: 0px;
+  height: 35px;
+  border: 0;
+  border-radius: 30px;
+  padding: 0 12px;
+  background-color: #671ac4;
+  color: black;
+  font-family: monospace;
+  font-weight: bolder;
+  font-size: 1.2em;
+  opacity: 0;
+  transition: all 1s;
+}
+
+nav input.open{
+  opacity: 1;
+  width: 200px;
+  background-color: #00d754;
+}
+
+
 /*-- USER CONTAINER ---*/
 
 .userHeadContainer{

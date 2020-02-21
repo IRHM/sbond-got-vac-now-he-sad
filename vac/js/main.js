@@ -10,6 +10,11 @@ var ui_minutes = document.getElementById("minute");
 var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
 
+// Search bar
+document.getElementById('navIcon').onclick = function(){
+  document.getElementById('navSearch').classList.toggle('open');
+}
+
 async function queryTrafficker(query){
   var response = await fetch('https://vac.sbond.co/api/trafficker.php', {
     method: "POST",
@@ -33,7 +38,7 @@ async function getProfileInfo(){
       ui_desc.innerHTML = msg.description;
       ui_loc.textContent = msg.location;
       ui_locImg.src = msg.locationImg;
-      document.body.style.backgroundImage = "url(" + msg.backgroundImg + ")";
+      // document.body.style.backgroundImage = "url(" + msg.backgroundImg + ")";
 
       if(msg.vacStatus){
         // Set countdown to days on users ban
@@ -94,4 +99,4 @@ async function makeCountdown(banDays){
   }, 1000);
 }
 
-getProfileInfo();
+// getProfileInfo();

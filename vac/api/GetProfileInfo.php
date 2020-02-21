@@ -6,7 +6,7 @@
 
   class GetProfileInfo{
     public function data(){
-      return $this->extactData('https://steamcommunity.com/id/idontknowplshelp');
+      return $this->extactData('https://steamcommunity.com/profiles/76561198172055451');
     }
 
     private function extactData($url){

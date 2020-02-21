@@ -1,28 +1,19 @@
-<?php
-  require_once('api/conf/Database.php');
-  require_once('api/GetProfileInfo.php');
-
-  use Api\Database;
-  use Api\GetProfileInfo;
-
-  // $database = new Database();
-  // $db = $database->connect();
-  //
-  // $getProfileInfo = new GetProfileInfo();
-  // $data = $getProfileInfo->data();
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
     <title>sbondVac</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.png">
     <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.svg">
   </head>
   <body>
+    <nav>
+      <input id="navSearch" type="search" name="" value="" placeholder="steamID">
+      <div class="icon" id="navIcon"></div>
+    </nav>
+
     <div class="userHeadContainer">
       <div class="wrapper">
         <div class="profilePicture">

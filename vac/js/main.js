@@ -8,6 +8,30 @@ var ui_days = document.getElementById("day");
 var ui_hours = document.getElementById("hour");
 var ui_minutes = document.getElementById("minute");
 var ui_second = document.getElementById("second");
+var ui_noVac = document.getElementById("noVac");
+var ui_steamIDForm = document.getElementById("steamIDForm")
+
+// Search bar
+document.getElementById('navIcon').onclick = function(){
+  document.getElementById('navSearch').classList.toggle('open');
+}
+
+ui_steamIDForm.onsubmit = function(){
+  event.preventDefault();
+
+  let searchBar = this['navSearch'];
+
+  if(searchBar.value != ""){
+    console.log("not empty");
+    queryTrafficker({ 'return':['getProfileInfo', searchBar.value] }).then((response) => {
+      console.log(response);
+      drawProfileInfo(response);
+    });
+  }
+  else{
+    console.log("empty");
+  }
+}
 
 async function queryTrafficker(query){
   var response = await fetch('https://vac.sbond.co/api/trafficker.php', {
@@ -21,27 +45,28 @@ async function queryTrafficker(query){
   return await response.json();
 }
 
-async function getProfileInfo(){
-  queryTrafficker({ 'return':'getProfileInfo' }).then((response) => {
-    if(typeof response.msg !== 'undefined' && response.msg.length > 0){
-      var msg = response.msg[0];
+async function drawProfileInfo(data){
+  if(typeof data.msg !== 'undefined' && data.msg.length > 0){
+    var msg = data.msg[0];
 
-      // Update profile UI elements
-      ui_avatar.src = msg.avatar;
-      ui_username.textContent = msg.username;
-      ui_desc.innerHTML = msg.description;
-      ui_loc.textContent = msg.location;
-      ui_locImg.src = msg.locationImg;
+    // Update profile UI elements
+    ui_avatar.src = msg.avatar;
+    ui_username.textContent = msg.username;
+    ui_desc.innerHTML = msg.description;
+    ui_loc.textContent = msg.location;
+    ui_locImg.src = msg.locationImg;
+    // document.body.style.backgroundImage = "url(" + msg.backgroundImg + ")";
 
-      if(msg.vacStatus){
-        // Set countdown to days on users ban
-        makeCountdown(msg.banDays);
-      }
-      else{
-        // User not vacced so dont show countdown
-      }
+    if(msg.vacStatus){
+      // Set countdown to days on users ban
+      makeCountdown(msg.banDays);
     }
-  });
+    else{
+      // User not vacced so dont show countdown
+      ui_counter.classList.add('hidden');
+      ui_noVac.classList.remove('hidden');
+    }
+  }
 }
 
 async function makeCountdown(banDays){
@@ -89,5 +114,3 @@ async function makeCountdown(banDays){
     }
   }, 1000);
 }
-
-getProfileInfo();

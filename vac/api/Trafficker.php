@@ -24,11 +24,36 @@
       if(isset($args['return'])){
         $val = $args['return'];
 
-        switch($val){
+        switch($val[0]){
           case "getProfileInfo":
             require_once($_SERVER['DOCUMENT_ROOT'] . '/api/GetProfileInfo.php');
             $getProfileInfo = new GetProfileInfo();
-            $this->sendMsg('msg', $getProfileInfo->data());
+
+            // Check for steamID
+            if(isset($val[1]) && !empty($val[1])){
+              // Val[1] in the request arr should be a steamID
+              // if it doesn't resemble one cancel and send an error
+              $steamID = $val[1];
+
+              if(ctype_digit($steamID)){
+                // steamID64
+                $this->sendMsg('msg', $getProfileInfo->data('steamID64', $steamID));
+              }
+              else if(strpos($steamID, 'steamcommunity.com/id')){
+                // steam customURL
+                $this->sendMsg('msg', $getProfileInfo->data('customURL', $steamID));
+              }
+              else{
+                // Not in supported format
+                $this->sendMsg('err', 'didnt detect any steam id');
+                exit();
+              }
+            }
+            else{
+              $this->sendMsg('err', 'no steamid set in request');
+              exit();
+            }
+
             break;
           default:
             $this->sendMsg('err', 'nothing to return');

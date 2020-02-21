@@ -23,7 +23,7 @@ ui_steamIDForm.onsubmit = function(){
 
   if(searchBar.value != ""){
     console.log("not empty");
-    queryTrafficker({ 'return':'getProfileInfo' }).then((response) => {
+    queryTrafficker({ 'return':['getProfileInfo', searchBar.value] }).then((response) => {
       console.log(response);
     });
   }

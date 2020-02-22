@@ -9,7 +9,8 @@ var ui_hours = document.getElementById("hour");
 var ui_minutes = document.getElementById("minute");
 var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
-var ui_steamIDForm = document.getElementById("steamIDForm")
+var ui_steamIDForm = document.getElementById("steamIDForm");
+var cd;
 
 // Search bar
 document.getElementById('navIcon').onclick = function(){
@@ -72,20 +73,24 @@ async function drawProfileInfo(data){
 }
 
 async function makeCountdown(banDays){
+  clearInterval(cd);
+
   Date.prototype.addDays = function(d){
     return new Date(this.valueOf()+864E5*d);
   };
 
-  banDaysLeft = 2556 - banDays;
+  // Preform very hard calculation
+  let sevenYears = 2556;
+  banDaysLeft = sevenYears - banDays;
 
   // Get date when ban is over
   var cdDate = new Date().addDays(banDaysLeft);
 
   // Remove hours, mins, seconds and milliseconds
-  var cdDate = new Date(cdDate.getFullYear(), cdDate.getMonth(), cdDate.getDate(), 0, 0, 0, 0);
+  cdDate = new Date(cdDate.getFullYear(), cdDate.getMonth(), cdDate.getDate(), 0, 0, 0, 0);
 
   // Countdown
-  var cd = setInterval(function(){
+  cd = setInterval(function(){
     // Get time now
     var now = Date.now();
 

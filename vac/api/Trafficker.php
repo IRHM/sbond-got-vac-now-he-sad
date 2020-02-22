@@ -40,6 +40,10 @@
                 // steamID64
                 $this->sendMsg('msg', $getProfileInfo->data('steamID64', $steamID));
               }
+              else if(strpos($steamID, 'steamcommunity.com/profiles')){
+                // steam customURL
+                $this->sendMsg('msg', $getProfileInfo->data('steamURL', $steamID));
+              }
               else if(strpos($steamID, 'steamcommunity.com/id')){
                 // steam customURL
                 $this->sendMsg('msg', $getProfileInfo->data('customURL', $steamID));

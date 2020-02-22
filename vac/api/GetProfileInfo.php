@@ -9,6 +9,9 @@
       if($type == 'steamID64'){
         return $this->extactData("https://steamcommunity.com/profiles/$id");
       }
+      else if($type == 'steamURL'){
+        return $this->extactData($id);
+      }
       else if($type == 'customURL'){
         return $this->extactData($id);
       }

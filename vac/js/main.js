@@ -12,6 +12,10 @@ var ui_noVac = document.getElementById("noVac");
 var ui_steamIDForm = document.getElementById("steamIDForm");
 var cd;
 
+function handleErr(err){
+  console.log(err);
+}
+
 // Search bar
 document.getElementById('navIcon').onclick = function(){
   this.classList.toggle('close');
@@ -51,6 +55,13 @@ async function queryTrafficker(query){
 async function drawProfileInfo(data){
   if(typeof data.msg !== 'undefined' && data.msg.length > 0){
     var msg = data.msg[0];
+
+    // Check if msg has err
+    if(typeof msg.err !== 'undefined' && data.msg.length > 0){
+      // msg contains error so handle & stop exit function
+      handleErr(msg.err);
+      return;
+    }
 
     // Update profile UI elements
     ui_avatar.src = msg.avatar;

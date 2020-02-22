@@ -23,16 +23,32 @@
     private function extactData($url){
       // Get extracted data from both methods
       $extractXml = $this->extractXml($url);
-      $extractScreen = $this->extractScreen($extractXml['vacStatus'], $url);
-      $allData = array_merge($extractXml, $extractScreen);
 
+      if(isset($extractXml['vacStatus'])){
+        // If xml set vacStatus continue to extractScreen
+        $extractScreen = $this->extractScreen($extractXml['vacStatus'], $url);
+        $allData = array_merge($extractXml, $extractScreen);
+      }
+      else{
+        // If xml didnt set vacStatus there must be an error so
+        // ..just set $allData to $extractXml to return it
+        $allData = $extractXml;
+      }
+
+      // Return message
       return array($allData);
     }
 
     private function extractXml($url){
       // Get xml data
       $url = "$url?xml=1";
-      $xml = simplexml_load_file($url);
+      $xml = @simplexml_load_file($url);
+
+      if(!$xml){
+        // Exit with error if cant load xml
+        return array('err' => 'error loading xml file');
+        exit();
+      }
 
       // Specific xml data
       if(isset($xml) && !empty($xml)){

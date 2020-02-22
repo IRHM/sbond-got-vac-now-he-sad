@@ -13,6 +13,7 @@ var ui_steamIDForm = document.getElementById("steamIDForm")
 
 // Search bar
 document.getElementById('navIcon').onclick = function(){
+  this.classList.toggle('close');
   document.getElementById('navSearch').classList.toggle('open');
 }
 

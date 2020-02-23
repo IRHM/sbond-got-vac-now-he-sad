@@ -13,14 +13,21 @@ var ui_steamIDForm = document.getElementById("steamIDForm");
 var cd;
 
 function handleErr(err){
-  // let ui_notice = document.getElementById("noticeContainer");
+  let ui_notice = document.getElementById("noticeContainer");
 
-  console.log(err);
+  // Add (another) notice box with error
+  ui_notice.insertAdjacentHTML('afterbegin', `
+    <div class="notice">
+      <span id="noticeMsg">Error</span>
+    </div>`);
 
-  // ui_notice.innerHTML = `
-  //   <div class="notice">
-  //     <span id="noticeMsg">Error</span>
-  //   </div>`;
+  // animation
+  let noticeKF = [
+    { top: '-100%' },
+    { top: '250px', offset: 0.8 },
+    { top: '10px' }
+  ];
+  let noticeAnim = ui_notice.animate(noticeKF, 50);
 }
 
 // Search bar

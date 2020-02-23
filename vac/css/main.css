@@ -21,10 +21,11 @@ nav .icon{
   position: absolute;
   margin: auto;
   top: 8px;
-  right: 1vw;
+  right: 10px;
   width: 50px;
   height: 50px;
   background: #671ac4;
+  box-shadow: 0 0px 12px 0 rgb(112, 6, 240);
   border-radius: 50%;
   transition: all 1s;
   z-index: 999;
@@ -60,19 +61,41 @@ nav .icon:after{
   transition: all .5s;
 }
 
+nav .icon.close{
+  background-color: black;
+  box-shadow: none;
+}
+
+nav .icon.close:before{
+  top: 0;
+  left: 0;
+  width: 25px;
+}
+
+nav .icon.close:after{
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 2px;
+  border: none;
+  background: white;
+  border-radius: 0%;
+  transform: rotate(-45deg);
+}
+
 nav .icon:hover{
   cursor: pointer;
 }
 
 nav input{
   position: absolute;
-  right: 3.5vw;
+  right: 30px;
   top: 17px;
   width: 0px;
   height: 35px;
   border: 0;
   border-radius: 30px 0 0 30px;
-  padding: 0 12px;
+  padding: 0 38px 0 12px;
   background-color: #671ac4;
   color: black;
   font-family: monospace;
@@ -84,10 +107,27 @@ nav input{
 
 nav input.open{
   opacity: 1;
-  width: 200px;
+  width: 250px;
   background-color: #00d754;
 }
 
+/*--- NOTICE ---*/
+
+.noticeContainer{
+  position: absolute;
+  left: 10px;
+  width: 300px;
+}
+
+.noticeContainer .notice{
+  margin-bottom: 8px;
+  padding: 6px;
+  background-color: #222;
+  border-left: 5px solid darkred;
+  color: white;
+  font-family: monospace;
+  font-size: 18px;
+}
 
 /*-- USER CONTAINER ---*/
 

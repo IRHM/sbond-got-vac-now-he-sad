@@ -5,9 +5,16 @@
   use DOMXpath;
 
   class GetProfileInfo{
-    public function data($type, $id){ //76561198172055451
+    public function data($id){
+      // Get type
+      $type = $this->detectType($id);
+
+      // Depending on type send different string to extractData()
       if($type == 'steamID64'){
         return $this->extactData("https://steamcommunity.com/profiles/$id");
+      }
+      else if($type == 'steamURL'){
+        return $this->extactData($id);
       }
       else if($type == 'customURL'){
         return $this->extactData($id);
@@ -17,19 +24,61 @@
       }
     }
 
+    private function detectType($id){
+      // Check for steamID
+      if(isset($id) && !empty($id)){
+        // Detect type
+        if(ctype_digit($id)){
+          return 'steamID64';
+        }
+        else if(strpos($id, 'steamcommunity.com/profiles')){
+          return 'steamURL';
+        }
+        else if(strpos($id, 'steamcommunity.com/id')){
+          return 'customURL';
+        }
+        else{
+          // Not in supported format
+          return 'didnt detect any steam id';
+          exit();
+        }
+      }
+      else{
+        // $id is not set or is empty
+        return 'no steamid set in request';
+        exit();
+      }
+    }
+
     private function extactData($url){
       // Get extracted data from both methods
       $extractXml = $this->extractXml($url);
-      $extractScreen = $this->extractScreen($extractXml['vacStatus'], $url);
-      $allData = array_merge($extractXml, $extractScreen);
 
+      if(isset($extractXml['vacStatus'])){
+        // If xml set vacStatus continue to extractScreen
+        $extractScreen = $this->extractScreen($extractXml['vacStatus'], $url);
+        $allData = array_merge($extractXml, $extractScreen);
+      }
+      else{
+        // If xml didnt set vacStatus there must be an error so
+        // ..just set $allData to $extractXml to return it
+        $allData = $extractXml;
+      }
+
+      // Return message
       return array($allData);
     }
 
     private function extractXml($url){
       // Get xml data
       $url = "$url?xml=1";
-      $xml = simplexml_load_file($url);
+      $xml = @simplexml_load_file($url);
+
+      if(!$xml){
+        // Exit with error if cant load xml
+        return array('err' => 'error loading xml file');
+        exit();
+      }
 
       // Specific xml data
       if(isset($xml) && !empty($xml)){

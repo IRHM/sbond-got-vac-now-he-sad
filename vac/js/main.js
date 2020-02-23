@@ -9,10 +9,30 @@ var ui_hours = document.getElementById("hour");
 var ui_minutes = document.getElementById("minute");
 var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
-var ui_steamIDForm = document.getElementById("steamIDForm")
+var ui_steamIDForm = document.getElementById("steamIDForm");
+var cd;
+
+function handleErr(err){
+  let ui_notice = document.getElementById("noticeContainer");
+
+  // Add (another) notice box with error
+  ui_notice.insertAdjacentHTML('afterbegin', `
+    <div class="notice">
+      <span id="noticeMsg">Error</span>
+    </div>`);
+
+  // animation
+  let noticeKF = [
+    { top: '-100%' },
+    { top: '250px', offset: 0.8 },
+    { top: '10px' }
+  ];
+  let noticeAnim = ui_notice.animate(noticeKF, 50);
+}
 
 // Search bar
 document.getElementById('navIcon').onclick = function(){
+  this.classList.toggle('close');
   document.getElementById('navSearch').classList.toggle('open');
 }
 
@@ -22,14 +42,15 @@ ui_steamIDForm.onsubmit = function(){
   let searchBar = this['navSearch'];
 
   if(searchBar.value != ""){
-    console.log("not empty");
+    // searchBar not empty - get profileInfo
     queryTrafficker({ 'return':['getProfileInfo', searchBar.value] }).then((response) => {
-      console.log(response);
+      // send response to drawProfileInfo to display it
       drawProfileInfo(response);
     });
   }
   else{
-    console.log("empty");
+    // searchBar empty
+
   }
 }
 
@@ -48,6 +69,13 @@ async function queryTrafficker(query){
 async function drawProfileInfo(data){
   if(typeof data.msg !== 'undefined' && data.msg.length > 0){
     var msg = data.msg[0];
+
+    // Check if msg has err
+    if(typeof msg.err !== 'undefined' && data.msg.length > 0){
+      // msg contains error so handle & stop exit function
+      handleErr(msg.err);
+      return;
+    }
 
     // Update profile UI elements
     ui_avatar.src = msg.avatar;
@@ -70,20 +98,24 @@ async function drawProfileInfo(data){
 }
 
 async function makeCountdown(banDays){
+  clearInterval(cd);
+
   Date.prototype.addDays = function(d){
     return new Date(this.valueOf()+864E5*d);
   };
 
-  banDaysLeft = 2556 - banDays;
+  // Preform very hard calculation
+  let sevenYears = 2556;
+  banDaysLeft = sevenYears - banDays;
 
   // Get date when ban is over
   var cdDate = new Date().addDays(banDaysLeft);
 
   // Remove hours, mins, seconds and milliseconds
-  var cdDate = new Date(cdDate.getFullYear(), cdDate.getMonth(), cdDate.getDate(), 0, 0, 0, 0);
+  cdDate = new Date(cdDate.getFullYear(), cdDate.getMonth(), cdDate.getDate(), 0, 0, 0, 0);
 
   // Countdown
-  var cd = setInterval(function(){
+  cd = setInterval(function(){
     // Get time now
     var now = Date.now();
 

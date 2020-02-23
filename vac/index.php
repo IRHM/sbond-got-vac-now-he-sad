@@ -11,10 +11,14 @@
   <body>
     <nav>
       <form id="steamIDForm">
-        <input id="navSearch" type="search" placeholder="steamID64">
+        <input id="navSearch" type="search" placeholder="steamID64/URL">
         <div class="icon" id="navIcon"></div>
       </form>
     </nav>
+
+    <div class="noticeContainer" id="noticeContainer">
+
+    </div>
 
     <div class="userHeadContainer">
       <div class="wrapper">

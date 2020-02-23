@@ -29,34 +29,17 @@
             require_once($_SERVER['DOCUMENT_ROOT'] . '/api/GetProfileInfo.php');
             $getProfileInfo = new GetProfileInfo();
 
-            // Check for steamID
+            // Check if steamID was sent along with request
             if(isset($val[1]) && !empty($val[1])){
-              // Val[1] in the request arr should be a steamID
-              // if it doesn't resemble one cancel and send an error
-              $steamID = $val[1];
-
-              if(ctype_digit($steamID)){
-                // steamID64
-                $this->sendMsg('msg', $getProfileInfo->data('steamID64', $steamID));
-              }
-              else if(strpos($steamID, 'steamcommunity.com/id')){
-                // steam customURL
-                $this->sendMsg('msg', $getProfileInfo->data('customURL', $steamID));
-              }
-              else{
-                // Not in supported format
-                $this->sendMsg('err', 'didnt detect any steam id');
-                exit();
-              }
+              $this->sendMsg('msg', $getProfileInfo->data($val[1]));
             }
             else{
-              $this->sendMsg('err', 'no steamid set in request');
-              exit();
+              $this->sendMsg('msg', array('err' => 'steamID not set or is not in the right place in your request'));
             }
 
             break;
           default:
-            $this->sendMsg('err', 'nothing to return');
+            $this->sendMsg('msg', array('err' => 'nothing to return'));
             break;
         }
       }

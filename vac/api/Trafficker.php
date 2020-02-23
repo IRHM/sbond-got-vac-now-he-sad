@@ -28,7 +28,15 @@
           case "getProfileInfo":
             require_once($_SERVER['DOCUMENT_ROOT'] . '/api/GetProfileInfo.php');
             $getProfileInfo = new GetProfileInfo();
-            $this->sendMsg('msg', $getProfileInfo->data($val[1])); // do if isset
+
+            // Check if steamID was sent along with request
+            if(isset($val[1]) && !empty($val[1])){
+              $this->sendMsg('msg', $getProfileInfo->data($val[1]));
+            }
+            else{
+              $this->sendMsg('msg', array('err' => 'steamID not set or is not in the right place in your request'));
+            }
+
             break;
           default:
             $this->sendMsg('msg', array('err' => 'nothing to return'));

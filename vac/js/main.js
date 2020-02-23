@@ -13,7 +13,14 @@ var ui_steamIDForm = document.getElementById("steamIDForm");
 var cd;
 
 function handleErr(err){
+  // let ui_notice = document.getElementById("noticeContainer");
+
   console.log(err);
+
+  // ui_notice.innerHTML = `
+  //   <div class="notice">
+  //     <span id="noticeMsg">Error</span>
+  //   </div>`;
 }
 
 // Search bar

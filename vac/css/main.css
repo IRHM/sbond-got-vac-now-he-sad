@@ -111,6 +111,36 @@ nav input.open{
   background-color: #00d754;
 }
 
+/*--- NOTICE ---*/
+
+.noticeContainer{
+  position: absolute;
+  left: 10px;
+  width: 300px;
+  background-color: #222;
+  color: white;
+  /* box-shadow: 0 0px 12px 0 #222; */
+  border-left: 5px solid darkred;
+  font-family: monospace;
+  font-size: 18px;
+  animation: notice 550ms ease;
+}
+
+.noticeContainer .notice{
+  padding: 6px;
+}
+
+@keyframes notice{
+  0%{
+    top: -100%;
+  }
+  80%{
+    top: 25px;
+  }
+  100%{
+    top: 10px;
+  }
+}
 
 /*-- USER CONTAINER ---*/
 

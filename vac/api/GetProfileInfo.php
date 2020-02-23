@@ -5,7 +5,11 @@
   use DOMXpath;
 
   class GetProfileInfo{
-    public function data($type, $id){
+    public function data($id){
+      // Get type
+      $type = $this->detectType($id);
+
+      // Depending on type send different string to extractData()
       if($type == 'steamID64'){
         return $this->extactData("https://steamcommunity.com/profiles/$id");
       }
@@ -17,6 +21,32 @@
       }
       else{
         return array('err' => 'type not understood');
+      }
+    }
+
+    private function detectType($id){
+      // Check for steamID
+      if(isset($id) && !empty($id)){
+        // Detect type
+        if(ctype_digit($id)){
+          return 'steamID64';
+        }
+        else if(strpos($id, 'steamcommunity.com/profiles')){
+          return 'steamURL';
+        }
+        else if(strpos($id, 'steamcommunity.com/id')){
+          return 'customURL';
+        }
+        else{
+          // Not in supported format
+          return 'didnt detect any steam id';
+          exit();
+        }
+      }
+      else{
+        // $id is not set or is empty
+        return 'no steamid set in request';
+        exit();
       }
     }
 

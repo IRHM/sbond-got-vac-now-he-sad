@@ -16,6 +16,10 @@
       </form>
     </nav>
 
+    <div class="noticeContainer" id="noticeContainer">
+
+    </div>
+
     <div class="userHeadContainer">
       <div class="wrapper">
         <div class="profilePicture">

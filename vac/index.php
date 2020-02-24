@@ -11,7 +11,7 @@
   <body>
     <nav>
       <form id="steamIDForm">
-        <input id="navSearch" type="search" placeholder="steamID64/URL">
+        <input id="navSearch" type="search" placeholder="steamID64/URL" autocomplete="off">
         <div class="icon" id="navIcon"></div>
       </form>
     </nav>

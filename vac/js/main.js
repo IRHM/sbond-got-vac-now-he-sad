@@ -11,23 +11,37 @@ var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
 var ui_steamIDForm = document.getElementById("steamIDForm");
 var cd;
+var handleErrPass = 0;
 
-function handleErr(err){
+async function deleteErr(id){
+  // Sleep 5 seconds
+  await new Promise(r => setTimeout(r, 5000));
+
+  // Delete notice
+  document.getElementById(id).remove();
+}
+
+async function handleErr(err){
   let ui_notice = document.getElementById("noticeContainer");
 
   // Add (another) notice box with error
-  ui_notice.insertAdjacentHTML('afterbegin', `
-    <div class="notice">
-      <span id="noticeMsg">Error</span>
-    </div>`);
+  ui_notice.insertAdjacentHTML('afterbegin',
+    `<div class="notice" id="notice`+handleErrPass+`">
+      <span>`+err+`</span>
+    </div>`
+  );
 
   // animation
   let noticeKF = [
-    { top: '-100%' },
-    { top: '250px', offset: 0.8 },
+    { top: '-10%' },
+    { top: '30px', offset: 0.1 },
     { top: '10px' }
   ];
-  let noticeAnim = ui_notice.animate(noticeKF, 50);
+  let noticeAnim = ui_notice.animate(noticeKF, 100);
+
+  deleteErr('notice' + handleErrPass);
+
+  handleErrPass++;
 }
 
 // Search bar

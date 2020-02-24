@@ -76,7 +76,7 @@
 
       if(!$xml){
         // Exit with error if cant load xml
-        return array('err' => 'error loading xml file');
+        return array('err' => 'steamid is wrong');
         exit();
       }
 

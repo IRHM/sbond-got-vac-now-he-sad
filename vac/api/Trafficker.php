@@ -13,7 +13,7 @@
 
       // If no JSON then exit
       if(!is_object(json_decode($JSON))){
-        $this->sendMsg('err', 'invalid request');
+        $this->respond('msg', array('err' => 'invalid request'));
         exit();
       }
 
@@ -31,21 +31,21 @@
 
             // Check if steamID was sent along with request
             if(isset($val[1]) && !empty($val[1])){
-              $this->sendMsg('msg', $getProfileInfo->data($val[1]));
+              $this->respond('msg', $getProfileInfo->data($val[1]));
             }
             else{
-              $this->sendMsg('msg', array('err' => 'steamID not set or is not in the right place in your request'));
+              $this->respond('msg', array('err' => 'steamID not set or is not in the right place in your request'));
             }
 
             break;
           default:
-            $this->sendMsg('msg', array('err' => 'nothing to return'));
+            $this->respond('msg', array('err' => 'nothing to return'));
             break;
         }
       }
     }
 
-    private function sendMsg($name, $msg){
+    private function respond($name, $msg){
       echo json_encode(array($name => $msg));
     }
   }

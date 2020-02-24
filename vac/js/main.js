@@ -11,23 +11,52 @@ var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
 var ui_steamIDForm = document.getElementById("steamIDForm");
 var cd;
+var handleErrPass = 0;
 
-function handleErr(err){
+async function deleteErr(id){
+  let notice = document.getElementById(id);
+
+  // animation
+  let animation = [
+    { transform: 'translate3D(0, 0, 0)' },
+    { transform: 'translate3D(0, 0, 0)', offset: 0.99 },
+    { transform: 'translate3D(-200%, 0, 0)' }
+  ];
+  let options = {
+    duration: 5000,
+    easing: 'ease',
+    fill: 'forwards'
+  };
+  let noticeAnim = notice.animate(animation, options);
+
+  // Sleep for as long as animation
+  await new Promise(r => setTimeout(r, 5000));
+
+  // Delete notice
+  notice.remove();
+}
+
+async function handleErr(err){
   let ui_notice = document.getElementById("noticeContainer");
 
   // Add (another) notice box with error
-  ui_notice.insertAdjacentHTML('afterbegin', `
-    <div class="notice">
-      <span id="noticeMsg">Error</span>
-    </div>`);
+  ui_notice.insertAdjacentHTML('afterbegin',
+    `<div class="notice" id="notice`+handleErrPass+`">
+      <span>`+err+`</span>
+    </div>`
+  );
 
   // animation
-  let noticeKF = [
-    { top: '-100%' },
-    { top: '250px', offset: 0.8 },
+  let animation = [
+    { top: '-10%' },
+    { top: '30px', offset: 0.1 },
     { top: '10px' }
   ];
-  let noticeAnim = ui_notice.animate(noticeKF, 50);
+  let noticeAnim = ui_notice.animate(animation, 100);
+
+  deleteErr('notice' + handleErrPass);
+
+  handleErrPass++;
 }
 
 // Search bar

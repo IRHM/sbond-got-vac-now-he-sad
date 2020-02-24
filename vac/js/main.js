@@ -14,11 +14,26 @@ var cd;
 var handleErrPass = 0;
 
 async function deleteErr(id){
-  // Sleep 5 seconds
+  let notice = document.getElementById(id);
+
+  // animation
+  let animation = [
+    { transform: 'translate3D(0, 0, 0)' },
+    { transform: 'translate3D(0, 0, 0)', offset: 0.99 },
+    { transform: 'translate3D(-200%, 0, 0)' }
+  ];
+  let options = {
+    duration: 5000,
+    easing: 'ease',
+    fill: 'forwards'
+  };
+  let noticeAnim = notice.animate(animation, options);
+
+  // Sleep for as long as animation
   await new Promise(r => setTimeout(r, 5000));
 
   // Delete notice
-  document.getElementById(id).remove();
+  notice.remove();
 }
 
 async function handleErr(err){
@@ -32,12 +47,12 @@ async function handleErr(err){
   );
 
   // animation
-  let noticeKF = [
+  let animation = [
     { top: '-10%' },
     { top: '30px', offset: 0.1 },
     { top: '10px' }
   ];
-  let noticeAnim = ui_notice.animate(noticeKF, 100);
+  let noticeAnim = ui_notice.animate(animation, 100);
 
   deleteErr('notice' + handleErrPass);
 

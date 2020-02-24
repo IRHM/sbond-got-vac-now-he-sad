@@ -20,7 +20,7 @@
         return $this->extactData($id);
       }
       else{
-        return array('err' => 'type not understood');
+        return array(array('err' => 'type not understood'));
       }
     }
 
@@ -76,7 +76,13 @@
 
       if(!$xml){
         // Exit with error if cant load xml
-        return array('err' => 'steamid is wrong');
+        return array('err' => 'requested steamid is wrong');
+        exit();
+      }
+      else if(!isset($xml->steamID)){
+        // steamID isn't set in returned xml so..
+        // requested url is wrong & returned xml must be an err from steam
+        return array('err' => 'requested steamid is wrong');
         exit();
       }
 

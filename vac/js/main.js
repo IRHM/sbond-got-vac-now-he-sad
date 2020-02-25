@@ -10,6 +10,7 @@ var ui_minutes = document.getElementById("minute");
 var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
 var ui_steamIDForm = document.getElementById("steamIDForm");
+var ui_navIcon = document.getElementById('navIcon');
 var cd;
 var handleErrPass = 0;
 
@@ -60,7 +61,7 @@ async function handleErr(err){
 }
 
 // Search bar
-document.getElementById('navIcon').onclick = function(){
+ui_navIcon.onclick = function(){
   this.classList.toggle('close');
   document.getElementById('navSearch').classList.toggle('open');
 }
@@ -71,15 +72,27 @@ ui_steamIDForm.onsubmit = function(){
   let searchBar = this['navSearch'];
 
   if(searchBar.value != ""){
+    searchBarLoading(1);
     // searchBar not empty - get profileInfo
     queryTrafficker({ 'return':['getProfileInfo', searchBar.value] }).then((response) => {
       // send response to drawProfileInfo to display it
-      drawProfileInfo(response);
+      drawProfileInfo(response).then(() => {
+        searchBarLoading(0);
+      });
     });
   }
   else{
     // searchBar empty
 
+  }
+}
+
+function searchBarLoading(loading){
+  if(loading){
+    ui_navIcon.classList.add("loading");
+  }
+  else{
+    ui_navIcon.classList.remove("loading");
   }
 }
 

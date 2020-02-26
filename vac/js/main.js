@@ -119,6 +119,10 @@ async function drawProfileInfo(data){
       return;
     }
 
+    // Reset counter and novac to default states
+    ui_counter.classList.remove('hidden');
+    ui_noVac.classList.add('hidden');
+
     // Update profile UI elements
     ui_avatar.src = msg.avatar;
     ui_username.textContent = msg.username;

@@ -19,6 +19,9 @@
       else if($type == 'customURL'){
         return $this->extactData($id);
       }
+      else if($type == 'customID'){
+        return $this->extactData("https://steamcommunity.com/id/$id");
+      }
       else{
         return array(array('err' => 'type not understood'));
       }
@@ -29,13 +32,20 @@
       if(isset($id) && !empty($id)){
         // Detect type
         if(ctype_digit($id)){
+          // Is int/only numbers
           return 'steamID64';
         }
         else if(strpos($id, 'steamcommunity.com/profiles')){
+          // Contains 'steamcommunity.com/profiles'
           return 'steamURL';
         }
         else if(strpos($id, 'steamcommunity.com/id')){
+          // Contains 'steamcommunity.com/id'
           return 'customURL';
+        }
+        else if(preg_match("/^[a-zA-Z0-9_-]+$/", $id)){
+          // Only Letters, Numbers, hyphen and underscore
+          return 'customID';
         }
         else{
           // Not in supported format

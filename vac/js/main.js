@@ -60,6 +60,36 @@ async function handleErr(err){
   handleErrPass++;
 }
 
+function urlParam(returnParam=0, add, name, data=0){
+  if(add){
+    // Get curr url
+    var url = new URL(window.location.href);
+    // Set new param name/data
+    var newUrl = url.searchParams.set(name, data);
+    // Update curr url
+    history.pushState(null, '', url);
+  }
+  else{
+    // Get curr url
+    var url = new URL(window.location.href);
+    // Get param val
+    var paramVal = url.searchParams.get(name);
+    // put paramName and paramVal together
+    var param = name + '=' + paramVal;
+
+    // Update curr url
+    var newUrl = window.location.href.replace(param, "");
+    if(newUrl){
+      history.pushState(null, "", newUrl);
+    }
+  }
+
+  if(returnParam){
+    // Return param val if requested
+    return url.searchParams.get(name);
+  }
+}
+
 // Search bar
 ui_navIcon.onclick = function(){
   this.classList.toggle('close');
@@ -73,10 +103,15 @@ ui_steamIDForm.onsubmit = function(){
 
   if(searchBar.value != ""){
     searchBarLoading(1);
+
+    // Add query to 'q' url param
+    urlParam(0, 1, 'q', searchBar.value);
+
     // searchBar not empty - get profileInfo
     queryTrafficker({ 'return':['getProfileInfo', searchBar.value] }).then((response) => {
       // send response to drawProfileInfo to display it
       drawProfileInfo(response).then(() => {
+
         searchBarLoading(0);
       });
     });
@@ -84,6 +119,8 @@ ui_steamIDForm.onsubmit = function(){
   else{
     // searchBar empty
 
+    // Remove 'q' params data
+    urlParam(0, 0, 'q');
   }
 }
 

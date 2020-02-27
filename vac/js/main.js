@@ -60,6 +60,43 @@ async function handleErr(err){
   handleErrPass++;
 }
 
+// Check for queries in url straight away
+var url = new URL(window.location.href);
+
+if(url.searchParams.get('q')){
+  drawProfileInfo(url.searchParams.get('q'));
+}
+
+function urlParam(returnParam=0, add, name, data=0){
+  if(add){
+    // Get curr url
+    var url = new URL(window.location.href);
+    // Set new param name/data
+    var newUrl = url.searchParams.set(name, data);
+    // Update curr url
+    history.pushState(null, '', url);
+  }
+  else{
+    // Get curr url
+    var url = new URL(window.location.href);
+    // Get param val
+    var paramVal = url.searchParams.get(name);
+    // put paramName and paramVal together
+    var param = name + '=' + paramVal;
+
+    // Update curr url
+    var newUrl = window.location.href.replace(param, "");
+    if(newUrl){
+      history.pushState(null, "", newUrl);
+    }
+  }
+
+  if(returnParam){
+    // Return param val if requested
+    return url.searchParams.get(name);
+  }
+}
+
 // Search bar
 ui_navIcon.onclick = function(){
   this.classList.toggle('close');
@@ -72,18 +109,21 @@ ui_steamIDForm.onsubmit = function(){
   let searchBar = this['navSearch'];
 
   if(searchBar.value != ""){
+    // searchBar not empty
     searchBarLoading(1);
-    // searchBar not empty - get profileInfo
-    queryTrafficker({ 'return':['getProfileInfo', searchBar.value] }).then((response) => {
-      // send response to drawProfileInfo to display it
-      drawProfileInfo(response).then(() => {
-        searchBarLoading(0);
-      });
+
+    // Add query to 'q' url param
+    urlParam(0, 1, 'q', searchBar.value);
+
+    drawProfileInfo(searchBar.value).then(() => {
+      searchBarLoading(0);
     });
   }
   else{
     // searchBar empty
 
+    // Remove 'q' params data
+    urlParam(0, 0, 'q');
   }
 }
 
@@ -108,39 +148,41 @@ async function queryTrafficker(query){
   return await response.json();
 }
 
-async function drawProfileInfo(data){
-  if(typeof data.msg !== 'undefined' && data.msg.length > 0){
-    var msg = data.msg[0];
+async function drawProfileInfo(id){
+  queryTrafficker({ 'return':['getProfileInfo', id] }).then((response) => {
+    if(typeof response.msg !== 'undefined' && response.msg.length > 0){
+      var msg = response.msg[0];
 
-    // Check if msg has err
-    if(typeof msg.err !== 'undefined' && data.msg.length > 0){
-      // msg contains error so handle & stop exit function
-      handleErr(msg.err);
-      return;
+      // Check if msg has err
+      if(typeof msg.err !== 'undefined' && response.msg.length > 0){
+        // msg contains error so handle & stop exit function
+        handleErr(msg.err);
+        return;
+      }
+
+      // Reset counter and novac to default states
+      ui_counter.classList.remove('hidden');
+      ui_noVac.classList.add('hidden');
+
+      // Update profile UI elements
+      ui_avatar.src = msg.avatar;
+      ui_username.textContent = msg.username;
+      ui_desc.innerHTML = msg.description;
+      ui_loc.textContent = msg.location;
+      ui_locImg.src = msg.locationImg;
+      // document.body.style.backgroundImage = "url(" + msg.backgroundImg + ")";
+
+      if(msg.vacStatus){
+        // Set countdown to days on users ban
+        makeCountdown(msg.banDays);
+      }
+      else{
+        // User not vacced so dont show countdown
+        ui_counter.classList.add('hidden');
+        ui_noVac.classList.remove('hidden');
+      }
     }
-
-    // Reset counter and novac to default states
-    ui_counter.classList.remove('hidden');
-    ui_noVac.classList.add('hidden');
-
-    // Update profile UI elements
-    ui_avatar.src = msg.avatar;
-    ui_username.textContent = msg.username;
-    ui_desc.innerHTML = msg.description;
-    ui_loc.textContent = msg.location;
-    ui_locImg.src = msg.locationImg;
-    // document.body.style.backgroundImage = "url(" + msg.backgroundImg + ")";
-
-    if(msg.vacStatus){
-      // Set countdown to days on users ban
-      makeCountdown(msg.banDays);
-    }
-    else{
-      // User not vacced so dont show countdown
-      ui_counter.classList.add('hidden');
-      ui_noVac.classList.remove('hidden');
-    }
-  }
+  });
 }
 
 async function makeCountdown(banDays){

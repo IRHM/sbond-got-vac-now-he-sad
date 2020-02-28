@@ -250,6 +250,8 @@ nav input.open{
   color: #00d754;
 }
 
+/*--- MEDIA QUERIES ---*/
+
 @media only screen and (max-width: 1000px){
   .counterContainer .counter{
     display: flex;
@@ -265,16 +267,38 @@ nav input.open{
 }
 
 @media only screen and (max-width: 650px){
+  /* COUNTER */
   .counterContainer .counter div span:nth-child(1){
     font-size: 4em;
+  }
+
+  /* NAV */
+  nav .icon{
+    position: fixed;
+    top: unset;
+    bottom: 10px;
+  }
+  nav input{
+    position: fixed;
+    top: unset;
+    bottom: 17px;
+  }
+  nav input.open{
+    width: 60%;
   }
 }
 
 @media only screen and (max-width: 500px){
+  /* COUNTER */
   .counterContainer .counter{
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
+  }
+
+  /* NAV */
+  nav input.open{
+    width: 250px;
   }
 }
 

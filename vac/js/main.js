@@ -11,6 +11,7 @@ var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
 var ui_steamIDForm = document.getElementById("steamIDForm");
 var ui_navIcon = document.getElementById('navIcon');
+var ui_navSearch = document.getElementById('navSearch');
 var cd;
 var handleErrPass = 0;
 
@@ -100,7 +101,12 @@ function urlParam(returnParam=0, add, name, data=0){
 // Search bar
 ui_navIcon.onclick = function(){
   this.classList.toggle('close');
-  document.getElementById('navSearch').classList.toggle('open');
+  ui_navSearch.classList.toggle('open');
+
+  if(ui_navSearch.classList.contains('open')){
+    // Only focus to search bar if it is open
+    ui_navSearch.focus();
+  }
 }
 
 ui_steamIDForm.onsubmit = function(){

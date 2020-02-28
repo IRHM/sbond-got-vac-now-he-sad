@@ -253,6 +253,7 @@ nav input.open{
 /*--- MEDIA QUERIES ---*/
 
 @media only screen and (max-width: 1000px){
+  /* COUNTER */
   .counterContainer .counter{
     display: flex;
     flex-wrap: wrap;
@@ -267,11 +268,6 @@ nav input.open{
 }
 
 @media only screen and (max-width: 650px){
-  /* COUNTER */
-  .counterContainer .counter div span:nth-child(1){
-    font-size: 4em;
-  }
-
   /* NAV */
   nav .icon{
     position: fixed;
@@ -286,19 +282,29 @@ nav input.open{
   nav input.open{
     width: 60%;
   }
+
+  /* USER */
+  .userHeadContainer{
+    margin: 15px 5%;
+  }
+
+  /* COUNTER */
+  .counterContainer .counter div span:nth-child(1){
+    font-size: 4em;
+  }
 }
 
 @media only screen and (max-width: 500px){
+  /* NAV */
+  nav input.open{
+    width: 250px;
+  }
+
   /* COUNTER */
   .counterContainer .counter{
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
-  }
-
-  /* NAV */
-  nav input.open{
-    width: 250px;
   }
 }
 

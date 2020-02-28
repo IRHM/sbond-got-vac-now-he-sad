@@ -250,6 +250,37 @@ nav input.open{
   color: #00d754;
 }
 
+@media only screen and (max-width: 1000px){
+  .counterContainer .counter{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .counterContainer .counter div{
+    flex: 1 1 30%;
+    text-align: center;
+  }
+  .counterContainer .counter div span:not(.days){
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 650px){
+  .counterContainer .counter div span:nth-child(1){
+    font-size: 4em;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .counterContainer .counter div span:nth-child(1){
+    font-size: 4em;
+  }  /* .counterContainer .counter{
+      display: flex;
+      flex-wrap: wrap;
+      flex-flow: column;
+    } */
+}
+
+
 /*--- STEAM STYLES ---*/
 
 .bb_h1{

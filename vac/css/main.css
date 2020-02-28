@@ -271,13 +271,11 @@ nav input.open{
 }
 
 @media only screen and (max-width: 500px){
-  .counterContainer .counter div span:nth-child(1){
-    font-size: 4em;
-  }  /* .counterContainer .counter{
-      display: flex;
-      flex-wrap: wrap;
-      flex-flow: column;
-    } */
+  .counterContainer .counter{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+  }
 }
 
 

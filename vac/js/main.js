@@ -1,3 +1,4 @@
+var ui_main = document.getElementById("mainContent");
 var ui_avatar = document.getElementById("avatar");
 var ui_username = document.getElementById("username");
 var ui_desc = document.getElementById("desc");
@@ -166,7 +167,8 @@ async function drawProfileInfo(id){
         return;
       }
 
-      // Reset counter and novac to default states
+      // Reset main divs to default states
+      ui_main.classList.remove('hidden');
       ui_counter.classList.remove('hidden');
       ui_noVac.classList.add('hidden');
 
@@ -174,9 +176,17 @@ async function drawProfileInfo(id){
       ui_avatar.src = msg.avatar;
       ui_username.textContent = msg.username;
       ui_desc.innerHTML = msg.description;
-      ui_loc.textContent = msg.location;
-      ui_locImg.src = msg.locationImg;
+
       // document.body.style.backgroundImage = "url(" + msg.backgroundImg + ")";
+
+      if(msg.location){
+        ui_loc.textContent = msg.location;
+        ui_locImg.src = msg.locationImg;
+      }
+      else{
+        ui_loc.textContent = "";
+        ui_locImg.src = "";
+      }
 
       if(msg.vacStatus){
         // Set countdown to days on users ban

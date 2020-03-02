@@ -144,7 +144,7 @@ function searchBarLoading(loading){
 }
 
 async function queryTrafficker(query){
-  var response = await fetch('https://vac.sbond.co/api/trafficker.php', {
+  var response = await fetch(SITE_URL + '/api/trafficker.php', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

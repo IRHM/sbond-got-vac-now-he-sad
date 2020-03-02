@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
     <title>sbondVac</title>
     <link rel="stylesheet" href="<?= $SITE_URL ?>/css/main.css">
-    <link rel="shortcut icon" href="<?= $SITE_URL ?>/i/ico/vac/logo.png">
-    <link rel="shortcut icon" href="<?= $SITE_URL ?>/i/ico/vac/logo.svg">
+    <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.png">
+    <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.svg">
   </head>
   <body>
     <nav>

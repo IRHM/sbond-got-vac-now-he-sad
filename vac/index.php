@@ -1,10 +1,14 @@
+<?php
+  require_once 'config.php';
+ ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
     <title>sbondVac</title>
-    <link rel="stylesheet" href="<?= $SITE_URL ?>/css/main.css">
+    <link rel="stylesheet" href="<?= Config::$SITE_URL ?>/css/main.css">
     <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.png">
     <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.svg">
   </head>
@@ -60,7 +64,7 @@
     </div>
 
     <script type="text/javascript">
-      const SITE_URL = '<?= $SITE_URL ?>';
+      const SITE_URL = '<?= Config::$SITE_URL ?>';
     </script>
     <script src="js/main.js" type="text/javascript"></script>
   </body>

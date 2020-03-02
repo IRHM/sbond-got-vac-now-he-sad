@@ -4,7 +4,8 @@
   use DOMDocument;
   use DOMXpath;
 
-  class GetProfileInfo{
+  class GetProfileInfo
+  {
     public function data($id){
       // Get type
       $type = $this->detectType($id);

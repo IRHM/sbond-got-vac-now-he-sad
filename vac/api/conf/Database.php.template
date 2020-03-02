@@ -3,7 +3,8 @@
 
   use PDO;
 
-  class Database{
+  class Database
+  {
     private $host   = "HOST";
     private $dbname = "DB";
     private $user   = "USER";

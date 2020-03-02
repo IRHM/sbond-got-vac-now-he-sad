@@ -6,7 +6,8 @@
   $trafficker = new Trafficker();
   $trafficker->handleRequest();
 
-  class Trafficker{
+  class Trafficker
+  {
     public function handleRequest(){
       // Get JSON from POST request
       $JSON = @file_get_contents('php://input');

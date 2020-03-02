@@ -1,7 +1,3 @@
-<?php
-  require_once 'config.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -64,7 +60,7 @@
     </div>
 
     <script type="text/javascript">
-      const SITE_URL = "<?= $SITE_URL ?>";
+      const SITE_URL = '<?= $SITE_URL ?>';
     </script>
     <script src="js/main.js" type="text/javascript"></script>
   </body>

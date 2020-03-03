@@ -66,6 +66,6 @@
     <script type="text/javascript">
       const SITE_URL = '<?= Config::$SITE_URL ?>';
     </script>
-    <script src="js/main.js" type="text/javascript"></script>
+    <script src="<?= Config::$SITE_URL ?>/js/main.js" type="text/javascript"></script>
   </body>
 </html>

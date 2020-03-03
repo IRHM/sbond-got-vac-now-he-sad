@@ -343,5 +343,5 @@ nav input.open{
 /*--- MISC ---*/
 
 .hidden{
-  display: none;
+  display: none !important;
 }

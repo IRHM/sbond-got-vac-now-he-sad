@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
     <title>sbondVac</title>
     <link rel="stylesheet" href="<?= Config::$SITE_URL ?>/css/main.css">
-    <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.png">
-    <link rel="shortcut icon" href="https://ul.sbond.co/i/ico/vac/logo.svg">
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="shortcut icon" href="/img/logo.svg">
   </head>
   <body>
     <nav>
@@ -62,10 +62,7 @@
         <div id="noVac" class="hidden">NOT VAC BANNED</div>
       </div>
     </div>
-
-    <script type="text/javascript">
-      const SITE_URL = '<?= Config::$SITE_URL ?>';
-    </script>
+		
     <script src="<?= Config::$SITE_URL ?>/js/main.js" type="text/javascript"></script>
   </body>
 </html>

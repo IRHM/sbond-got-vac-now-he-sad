@@ -1,3 +1,4 @@
+const SITE_URL = "https://vac.sbond.co";
 var ui_main = document.getElementById("mainContent");
 var ui_avatar = document.getElementById("avatar");
 var ui_username = document.getElementById("username");
@@ -144,7 +145,7 @@ function searchBarLoading(loading){
 }
 
 async function queryTrafficker(query){
-  var response = await fetch(SITE_URL + '/api/trafficker.php', {
+  var response = await fetch(SITE_URL + '/api/Trafficker.php', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

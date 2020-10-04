@@ -1,16 +1,14 @@
-<?php
-  require_once 'config.php';
- ?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
     <title>sbondVac</title>
-    <link rel="stylesheet" href="<?= Config::$SITE_URL ?>/css/main.css">
     <link rel="shortcut icon" href="/img/logo.png">
     <link rel="shortcut icon" href="/img/logo.svg">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/main.js" defer></script>
+    <script async defer data-website-id="5903d738-7e73-48ea-8238-f3afc9d24d73" src="https://anal.sbond.co/umami.js"></script>
   </head>
   <body>
     <nav>
@@ -62,7 +60,5 @@
         <div id="noVac" class="hidden">NOT VAC BANNED</div>
       </div>
     </div>
-		
-    <script src="<?= Config::$SITE_URL ?>/js/main.js" type="text/javascript"></script>
   </body>
 </html>

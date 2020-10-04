@@ -117,14 +117,10 @@ ui_steamIDForm.onsubmit = function(){
 
   if(searchBar.value != ""){
     // searchBar not empty
-    searchBarLoading(1);
-
     // Add query to 'q' url param
     urlParam(0, 1, 'q', searchBar.value);
 
-    drawProfileInfo(searchBar.value).then(() => {
-      searchBarLoading(0);
-    });
+    drawProfileInfo(searchBar.value);
   }
   else{
     // searchBar empty
@@ -156,6 +152,8 @@ async function queryTrafficker(query){
 }
 
 async function drawProfileInfo(id){
+  searchBarLoading(true);
+
   queryTrafficker({ 'return':['getProfileInfo', id] }).then((response) => {
     if(typeof response.msg !== 'undefined' && response.msg.length > 0){
       var msg = response.msg[0];
@@ -198,6 +196,8 @@ async function drawProfileInfo(id){
         ui_noVac.classList.remove('hidden');
       }
     }
+
+    searchBarLoading(false);
   });
 }
 

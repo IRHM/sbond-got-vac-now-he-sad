@@ -28,6 +28,7 @@ nav .icon{
   box-shadow: 0 0px 12px 0 rgb(112, 6, 240);
   border-radius: 50%;
   transition: all 1s;
+  animation: none;
   z-index: 999;
 }
 
@@ -87,7 +88,7 @@ nav .icon.loading{
   border: 3px solid white;
   border-top: 3px solid black;
   border-radius: 50%;
-  animation: spin 2s cubic-bezier(.79,.14,.15,.86) infinite;
+  animation: spin 2s cubic-bezier(.79,.14,.15,.86) infinite !important;
 }
 
 nav .icon.loading:before{

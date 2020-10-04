@@ -16,7 +16,7 @@ var ui_navSearch = document.getElementById('navSearch');
 var cd;
 var handleErrPass = 0;
 
-async function deleteErr(id){
+async function deleteErr(id) {
   let notice = document.getElementById(id);
 
   // animation
@@ -39,13 +39,13 @@ async function deleteErr(id){
   notice.remove();
 }
 
-async function handleErr(err){
+async function handleErr(err) {
   let ui_notice = document.getElementById("noticeContainer");
 
   // Add (another) notice box with error
   ui_notice.insertAdjacentHTML('afterbegin',
-    `<div class="notice" id="notice`+handleErrPass+`">
-      <span>`+err+`</span>
+    `<div class="notice" id="notice` + handleErrPass + `">
+      <span>`+ err + `</span>
     </div>`
   );
 
@@ -65,12 +65,12 @@ async function handleErr(err){
 // Check for queries in url straight away
 var url = new URL(window.location.href);
 
-if(url.searchParams.get('q')){
+if (url.searchParams.get('q')) {
   drawProfileInfo(url.searchParams.get('q'));
 }
 
-function urlParam(returnParam=0, add, name, data=0){
-  if(add){
+function urlParam(returnParam = 0, add, name, data = 0) {
+  if (add) {
     // Get curr url
     var url = new URL(window.location.href);
     // Set new param name/data
@@ -78,7 +78,7 @@ function urlParam(returnParam=0, add, name, data=0){
     // Update curr url
     history.pushState(null, '', url);
   }
-  else{
+  else {
     // Get curr url
     var url = new URL(window.location.href);
     // Get param val
@@ -88,41 +88,41 @@ function urlParam(returnParam=0, add, name, data=0){
 
     // Update curr url
     var newUrl = window.location.href.replace(param, "");
-    if(newUrl){
+    if (newUrl) {
       history.pushState(null, "", newUrl);
     }
   }
 
-  if(returnParam){
+  if (returnParam) {
     // Return param val if requested
     return url.searchParams.get(name);
   }
 }
 
 // Search bar
-ui_navIcon.onclick = function(){
+ui_navIcon.onclick = function () {
   this.classList.toggle('close');
   ui_navSearch.classList.toggle('open');
 
-  if(ui_navSearch.classList.contains('open')){
+  if (ui_navSearch.classList.contains('open')) {
     // Only focus to search bar if it is open
     ui_navSearch.focus();
   }
 }
 
-ui_steamIDForm.onsubmit = function(){
+ui_steamIDForm.onsubmit = function () {
   event.preventDefault();
 
   let searchBar = this['navSearch'];
 
-  if(searchBar.value != ""){
+  if (searchBar.value != "") {
     // searchBar not empty
     // Add query to 'q' url param
     urlParam(0, 1, 'q', searchBar.value);
 
     drawProfileInfo(searchBar.value);
   }
-  else{
+  else {
     // searchBar empty
 
     // Remove 'q' params data
@@ -130,16 +130,16 @@ ui_steamIDForm.onsubmit = function(){
   }
 }
 
-function searchBarLoading(loading){
-  if(loading){
+function searchBarLoading(loading) {
+  if (loading) {
     ui_navIcon.classList.add("loading");
   }
-  else{
+  else {
     ui_navIcon.classList.remove("loading");
   }
 }
 
-async function queryTrafficker(query){
+async function queryTrafficker(query) {
   var response = await fetch('/api/Trafficker.php', {
     method: "POST",
     headers: {
@@ -151,15 +151,15 @@ async function queryTrafficker(query){
   return await response.json();
 }
 
-async function drawProfileInfo(id){
+async function drawProfileInfo(id) {
   searchBarLoading(true);
 
-  queryTrafficker({ 'return':['getProfileInfo', id] }).then((response) => {
-    if(typeof response.msg !== 'undefined' && response.msg.length > 0){
+  queryTrafficker({ 'return': ['getProfileInfo', id] }).then((response) => {
+    if (typeof response.msg !== 'undefined' && response.msg.length > 0) {
       var msg = response.msg[0];
 
       // Check if msg has err
-      if(typeof msg.err !== 'undefined' && response.msg.length > 0){
+      if (typeof msg.err !== 'undefined' && response.msg.length > 0) {
         // msg contains error so handle & stop exit function
         handleErr(msg.err);
         return;
@@ -177,20 +177,20 @@ async function drawProfileInfo(id){
 
       // document.body.style.backgroundImage = "url(" + msg.backgroundImg + ")";
 
-      if(msg.location){
+      if (msg.location) {
         ui_loc.textContent = msg.location;
         ui_locImg.src = msg.locationImg;
       }
-      else{
+      else {
         ui_loc.textContent = "";
         ui_locImg.src = "";
       }
 
-      if(msg.vacStatus){
+      if (msg.vacStatus) {
         // Set countdown to days on users ban
         makeCountdown(msg.banDays);
       }
-      else{
+      else {
         // User not vacced so dont show countdown
         ui_counter.classList.add('hidden');
         ui_noVac.classList.remove('hidden');
@@ -201,11 +201,11 @@ async function drawProfileInfo(id){
   });
 }
 
-async function makeCountdown(banDays){
+async function makeCountdown(banDays) {
   clearInterval(cd);
 
-  Date.prototype.addDays = function(d){
-    return new Date(this.valueOf()+864E5*d);
+  Date.prototype.addDays = function (d) {
+    return new Date(this.valueOf() + 864E5 * d);
   };
 
   // Preform very hard calculation
@@ -219,7 +219,7 @@ async function makeCountdown(banDays){
   cdDate = new Date(cdDate.getFullYear(), cdDate.getMonth(), cdDate.getDate(), 0, 0, 0, 0);
 
   // Countdown
-  cd = setInterval(function(){
+  cd = setInterval(function () {
     // Get time now
     var now = Date.now();
 
@@ -239,12 +239,12 @@ async function makeCountdown(banDays){
     ui_second.firstElementChild.textContent = seconds;
 
     // Hide hours/days/minutes when they are 0
-    if(days === 0){
+    if (days === 0) {
       ui_days.style.display = "none";
     }
 
     // Stop when countdown hits 0
-    if(distance < 0){
+    if (distance < 0) {
       clearInterval(cd);
       ui_counter.style.display = "none";
     }

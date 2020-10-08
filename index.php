@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="/img/logo.svg">
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/main.js" defer></script>
-    <script async defer data-website-id="5903d738-7e73-48ea-8238-f3afc9d24d73" src="https://anal.sbond.co/umami.js"></script>
+    <script async defer data-domains="vac.sbond.co" data-website-id="5903d738-7e73-48ea-8238-f3afc9d24d73" src="https://anal.sbond.co/umami.js"></script>
   </head>
   <body>
     <nav>

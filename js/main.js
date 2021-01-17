@@ -11,8 +11,8 @@ var ui_minutes = document.getElementById("minute");
 var ui_second = document.getElementById("second");
 var ui_noVac = document.getElementById("noVac");
 var ui_steamIDForm = document.getElementById("steamIDForm");
-var ui_navIcon = document.getElementById('navIcon');
-var ui_navSearch = document.getElementById('navSearch');
+var ui_navIcon = document.getElementById("navIcon");
+var ui_navSearch = document.getElementById("navSearch");
 var cd;
 var handleErrPass = 0;
 
@@ -21,19 +21,19 @@ async function deleteErr(id) {
 
   // animation
   let animation = [
-    { transform: 'translate3D(0, 0, 0)' },
-    { transform: 'translate3D(0, 0, 0)', offset: 0.99 },
-    { transform: 'translate3D(-200%, 0, 0)' }
+    { transform: "translate3D(0, 0, 0)" },
+    { transform: "translate3D(0, 0, 0)", offset: 0.99 },
+    { transform: "translate3D(-200%, 0, 0)" }
   ];
   let options = {
     duration: 5000,
-    easing: 'ease',
-    fill: 'forwards'
+    easing: "ease",
+    fill: "forwards"
   };
   let noticeAnim = notice.animate(animation, options);
 
   // Sleep for as long as animation
-  await new Promise(r => setTimeout(r, 5000));
+  await new Promise((r) => setTimeout(r, 5000));
 
   // Delete notice
   notice.remove();
@@ -43,21 +43,18 @@ async function handleErr(err) {
   let ui_notice = document.getElementById("noticeContainer");
 
   // Add (another) notice box with error
-  ui_notice.insertAdjacentHTML('afterbegin',
-    `<div class="notice" id="notice` + handleErrPass + `">
-      <span>`+ err + `</span>
+  ui_notice.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="notice" id="notice${handleErrPass}">
+      <span>${err}</span>
     </div>`
   );
 
   // animation
-  let animation = [
-    { top: '-10%' },
-    { top: '30px', offset: 0.1 },
-    { top: '10px' }
-  ];
+  let animation = [{ top: "-10%" }, { top: "30px", offset: 0.1 }, { top: "10px" }];
   let noticeAnim = ui_notice.animate(animation, 100);
 
-  deleteErr('notice' + handleErrPass);
+  deleteErr("notice" + handleErrPass);
 
   handleErrPass++;
 }
@@ -65,8 +62,8 @@ async function handleErr(err) {
 // Check for queries in url straight away
 var url = new URL(window.location.href);
 
-if (url.searchParams.get('q')) {
-  drawProfileInfo(url.searchParams.get('q'));
+if (url.searchParams.get("q")) {
+  drawProfileInfo(url.searchParams.get("q"));
 }
 
 function urlParam(returnParam = 0, add, name, data = 0) {
@@ -76,15 +73,14 @@ function urlParam(returnParam = 0, add, name, data = 0) {
     // Set new param name/data
     var newUrl = url.searchParams.set(name, data);
     // Update curr url
-    history.pushState(null, '', url);
-  }
-  else {
+    history.pushState(null, "", url);
+  } else {
     // Get curr url
     var url = new URL(window.location.href);
     // Get param val
     var paramVal = url.searchParams.get(name);
     // put paramName and paramVal together
-    var param = name + '=' + paramVal;
+    var param = name + "=" + paramVal;
 
     // Update curr url
     var newUrl = window.location.href.replace(param, "");
@@ -101,46 +97,44 @@ function urlParam(returnParam = 0, add, name, data = 0) {
 
 // Search bar
 ui_navIcon.onclick = function () {
-  this.classList.toggle('close');
-  ui_navSearch.classList.toggle('open');
+  this.classList.toggle("close");
+  ui_navSearch.classList.toggle("open");
 
-  if (ui_navSearch.classList.contains('open')) {
+  if (ui_navSearch.classList.contains("open")) {
     // Only focus to search bar if it is open
     ui_navSearch.focus();
   }
-}
+};
 
 ui_steamIDForm.onsubmit = function () {
   event.preventDefault();
 
-  let searchBar = this['navSearch'];
+  let searchBar = this["navSearch"];
 
   if (searchBar.value != "") {
     // searchBar not empty
     // Add query to 'q' url param
-    urlParam(0, 1, 'q', searchBar.value);
+    urlParam(0, 1, "q", searchBar.value);
 
     drawProfileInfo(searchBar.value);
-  }
-  else {
+  } else {
     // searchBar empty
 
     // Remove 'q' params data
-    urlParam(0, 0, 'q');
+    urlParam(0, 0, "q");
   }
-}
+};
 
 function searchBarLoading(loading) {
   if (loading) {
     ui_navIcon.classList.add("loading");
-  }
-  else {
+  } else {
     ui_navIcon.classList.remove("loading");
   }
 }
 
 async function queryTrafficker(query) {
-  var response = await fetch('/api/Trafficker.php', {
+  var response = await fetch("/api/Trafficker.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -154,21 +148,21 @@ async function queryTrafficker(query) {
 async function drawProfileInfo(id) {
   searchBarLoading(true);
 
-  queryTrafficker({ 'return': ['getProfileInfo', id] }).then((response) => {
-    if (typeof response.msg !== 'undefined' && response.msg.length > 0) {
+  queryTrafficker({ return: ["getProfileInfo", id] }).then((response) => {
+    if (typeof response.msg !== "undefined" && response.msg.length > 0) {
       var msg = response.msg[0];
 
       // Check if msg has err
-      if (typeof msg.err !== 'undefined' && response.msg.length > 0) {
+      if (typeof msg.err !== "undefined" && response.msg.length > 0) {
         // msg contains error so handle & stop exit function
         handleErr(msg.err);
         return;
       }
 
       // Reset main divs to default states
-      ui_main.classList.remove('hidden');
-      ui_counter.classList.remove('hidden');
-      ui_noVac.classList.add('hidden');
+      ui_main.classList.remove("hidden");
+      ui_counter.classList.remove("hidden");
+      ui_noVac.classList.add("hidden");
 
       // Update profile UI elements
       ui_avatar.src = msg.avatar;
@@ -180,8 +174,7 @@ async function drawProfileInfo(id) {
       if (msg.location) {
         ui_loc.textContent = msg.location;
         ui_locImg.src = msg.locationImg;
-      }
-      else {
+      } else {
         ui_loc.textContent = "";
         ui_locImg.src = "";
       }
@@ -189,11 +182,10 @@ async function drawProfileInfo(id) {
       if (msg.vacStatus) {
         // Set countdown to days on users ban
         makeCountdown(msg.banDays);
-      }
-      else {
+      } else {
         // User not vacced so dont show countdown
-        ui_counter.classList.add('hidden');
-        ui_noVac.classList.remove('hidden');
+        ui_counter.classList.add("hidden");
+        ui_noVac.classList.remove("hidden");
       }
     }
 
@@ -205,7 +197,7 @@ async function makeCountdown(banDays) {
   clearInterval(cd);
 
   Date.prototype.addDays = function (d) {
-    return new Date(this.valueOf() + 864E5 * d);
+    return new Date(this.valueOf() + 864e5 * d);
   };
 
   // Preform very hard calculation

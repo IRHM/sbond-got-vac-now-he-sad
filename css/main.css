@@ -1,15 +1,15 @@
 /*--- DEFAULTS ---*/
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   font-family: sans-serif;
   text-rendering: optimizeLegibility;
-  background-image: url('');
+  background-image: url("");
   background-position: 49.999% 0;
   background-repeat: no-repeat;
   background-color: #121212;
@@ -17,7 +17,7 @@ body{
 
 /*--- NAVBAR ---*/
 
-nav .icon{
+nav .icon {
   position: absolute;
   margin: auto;
   top: 8px;
@@ -32,7 +32,7 @@ nav .icon{
   z-index: 999;
 }
 
-nav .icon:before{
+nav .icon:before {
   content: "";
   position: absolute;
   margin: auto;
@@ -44,10 +44,10 @@ nav .icon:before{
   height: 2px;
   background: #fff;
   transform: rotate(45deg);
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
-nav .icon:after{
+nav .icon:after {
   content: "";
   position: absolute;
   margin: auto;
@@ -59,21 +59,21 @@ nav .icon:after{
   height: 15px;
   border-radius: 50%;
   border: 2px solid #fff;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
-nav .icon.close{
+nav .icon.close {
   background-color: black;
   box-shadow: none;
 }
 
-nav .icon.close:before{
+nav .icon.close:before {
   top: 0;
   left: 0;
   width: 25px;
 }
 
-nav .icon.close:after{
+nav .icon.close:after {
   top: 0;
   left: 0;
   width: 25px;
@@ -84,31 +84,35 @@ nav .icon.close:after{
   transform: rotate(-45deg);
 }
 
-nav .icon.loading{
+nav .icon.loading {
   border: 3px solid white;
   border-top: 3px solid black;
   border-radius: 50%;
-  animation: spin 2s cubic-bezier(.79,.14,.15,.86) infinite !important;
+  animation: spin 2s cubic-bezier(0.79, 0.14, 0.15, 0.86) infinite !important;
 }
 
-nav .icon.loading:before{
+nav .icon.loading:before {
   display: none;
 }
 
-nav .icon.loading:after{
+nav .icon.loading:after {
   display: none;
 }
 
-@keyframes spin{
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-nav .icon:hover{
+nav .icon:hover {
   cursor: pointer;
 }
 
-nav input{
+nav input {
   position: absolute;
   right: 30px;
   top: 17px;
@@ -126,7 +130,7 @@ nav input{
   transition: all 1s;
 }
 
-nav input.open{
+nav input.open {
   opacity: 1;
   width: 250px;
   background-color: #00d754;
@@ -134,13 +138,13 @@ nav input.open{
 
 /*--- NOTICE ---*/
 
-.noticeContainer{
+.noticeContainer {
   position: absolute;
   left: 10px;
   width: 300px;
 }
 
-.noticeContainer .notice{
+.noticeContainer .notice {
   margin-bottom: 8px;
   padding: 6px;
   background-color: #222;
@@ -152,14 +156,14 @@ nav input.open{
 
 /*-- USER CONTAINER ---*/
 
-.userHeadContainer{
+.userHeadContainer {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   margin: 30px 15%;
 }
 
-.userHeadContainer .wrapper{
+.userHeadContainer .wrapper {
   background-color: #ffffff05;
   padding: 8px;
   border-radius: 8px;
@@ -167,182 +171,177 @@ nav input.open{
   box-shadow: 0px 0px 10px #ffffff12;
 }
 
-.userHeadContainer .wrapper .profilePicture img{
+.userHeadContainer .wrapper .profilePicture img {
   float: left;
   width: 164px;
   margin-right: 10px;
 }
 
-.userHeadContainer .data{
+.userHeadContainer .data {
   flex-flow: column wrap;
   align-content: space-between;
   justify-content: space-between;
 }
 
-.userHeadContainer .data span{
+.userHeadContainer .data span {
   display: block;
-  color: #E4E4E5;
+  color: #e4e4e5;
   padding: 0 0 5px 0;
 }
 
-.userHeadContainer .data span{
+.userHeadContainer .data span {
   max-height: 3.5em;
   overflow: hidden;
 }
 
-.userHeadContainer .data #username{
+.userHeadContainer .data #username {
   font-size: 28px;
 }
 
-.userHeadContainer .data .locationWrap img{
+.userHeadContainer .data .locationWrap img {
   display: inline;
   vertical-align: middle;
   width: 16px;
   margin-right: 1px;
 }
 
-.userHeadContainer .data .locationWrap span{
+.userHeadContainer .data .locationWrap span {
   display: inline;
 }
 
 /*--- COUNTER ---*/
 
-.counterContainer{
+.counterContainer {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.counterContainer .counter{
-
-}
-
-.counterContainer .counter div{
+.counterContainer .counter div {
   display: inline-block;
   margin: 25px 50px;
 }
 
-.counterContainer .counter div span{
+.counterContainer .counter div span {
   transition: color 250ms ease;
 }
 
-.counterContainer .counter div span:not(.days){
+.counterContainer .counter div span:not(.days) {
   width: 112px;
 }
 
-.counterContainer .counter div span:nth-child(1){
+.counterContainer .counter div span:nth-child(1) {
   display: block;
   font-size: 100px;
   color: #671ac4;
 }
 
-.counterContainer .counter div span:nth-child(2){
+.counterContainer .counter div span:nth-child(2) {
   font-weight: bold;
   color: #008c37;
 }
 
-.counterContainer .counter div:hover span{
+.counterContainer .counter div:hover span {
   transition: color 250ms ease;
   color: #00d754 !important;
 }
 
-#noVac{
+#noVac {
   font-size: 50px;
   color: #00d754;
 }
 
 /*--- MEDIA QUERIES ---*/
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1000px) {
   /* COUNTER */
-  .counterContainer .counter{
+  .counterContainer .counter {
     display: flex;
     flex-wrap: wrap;
   }
-  .counterContainer .counter div{
+  .counterContainer .counter div {
     flex: 1 1 30%;
     text-align: center;
   }
-  .counterContainer .counter div span:not(.days){
+  .counterContainer .counter div span:not(.days) {
     width: auto;
   }
 }
 
-@media only screen and (max-width: 650px){
+@media only screen and (max-width: 650px) {
   /* NAV */
-  nav .icon{
+  nav .icon {
     position: fixed;
     top: unset;
     bottom: 10px;
   }
-  nav input{
+  nav input {
     position: fixed;
     top: unset;
     bottom: 17px;
   }
-  nav input.open{
+  nav input.open {
     width: 60%;
   }
 
   /* USER */
-  .userHeadContainer{
+  .userHeadContainer {
     margin: 15px 5%;
   }
 
   /* COUNTER */
-  .counterContainer .counter div span:nth-child(1){
+  .counterContainer .counter div span:nth-child(1) {
     font-size: 4em;
   }
 }
 
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 500px) {
   /* NAV */
-  nav input.open{
+  nav input.open {
     width: 250px;
   }
 
   /* COUNTER */
-  .counterContainer .counter{
+  .counterContainer .counter {
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
   }
 }
 
-
 /*--- STEAM STYLES ---*/
 
-.bb_h1{
+.bb_h1 {
   font-size: 20px !important;
 }
 
-.bb_link{
+.bb_link {
   color: #ebebeb !important;
   text-decoration: none !important;
   cursor: pointer !important;
   text-decoration: underline !important;
 }
 
-.bb_link:hover{
+.bb_link:hover {
   color: #f456f9 !important;
 }
 
-.bb_spoiler{
+.bb_spoiler {
   padding: 3px !important;
   background-color: black !important;
   color: black !important;
 }
 
-.bb_spoiler:hover{
+.bb_spoiler:hover {
   color: white !important;
 }
 
-.bb_strike{
+.bb_strike {
   text-decoration: line-through !important;
 }
 
 /*--- MISC ---*/
 
-.hidden{
+.hidden {
   display: none !important;
 }

@@ -158,10 +158,17 @@
         $banDays = 0;
 
         // Get location image
-        $locationImg = $xpath->query("/html/body/div[1]/div[7]/div[6]/div/div[1]/div/div/div/div[1]/div[2]/img")->item(0);
+        // For users with an animated background, steam creates another div to hold it.
+        // This means we have to check once if div '1' contains the location img and if not then check div '2'.
+        // If not in either div, then user must have no location set.
+        $locationImg = "";
+        for ($i = 1; $i <= 3; $i++) {
+          $locImg = $xpath->query("/html/body/div[1]/div[7]/div[6]/div/div[$i]/div/div/div/div[1]/div[2]/img")->item(0);
 
-        if(isset($locationImg) && !empty($locationImg)){
-          $locationImg = $locationImg->attributes->getNamedItem('src')->nodeValue;
+          if (isset($locImg) && !empty($locImg)) {
+            $locationImg = $locImg->attributes->getNamedItem('src')->nodeValue;
+            break;
+          }
         }
 
         // Get background image

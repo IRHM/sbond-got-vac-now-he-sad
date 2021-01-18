@@ -140,6 +140,7 @@ nav input.open {
 
 .noticeContainer {
   position: absolute;
+  top: 10px;
   left: 10px;
   width: 300px;
 }

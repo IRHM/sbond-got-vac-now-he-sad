@@ -185,7 +185,7 @@
 
         // Get ban info from page if vacced
         if($vacStatus){
-          $banInfo = $xpath->query('/html/body/div[1]/div[7]/div[3]/div[1]/div[2]/div/div[1]/div[1]/div[2]')->item(0);
+          $banInfo = $xpath->query('/html/body/div[1]/div[7]/div[6]/div/div[2]/div/div[1]/div[1]/div[2]')->item(0);
 
           // Remove 'Info' and remove unnecessary spaces
           $banFullMsg = str_replace('Info', '', $banInfo->textContent);

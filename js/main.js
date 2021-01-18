@@ -157,6 +157,7 @@ async function drawProfileInfo(id) {
       if (typeof msg.err !== "undefined" && response.msg.length > 0) {
         // msg contains error so handle & stop exit function
         handleErr(msg.err);
+        searchBarLoading(false);
         return;
       }
 

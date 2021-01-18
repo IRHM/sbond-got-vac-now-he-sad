@@ -158,7 +158,7 @@
         $banDays = 0;
 
         // Get location image
-        $locationImg = $xpath->query("/html/body/div[1]/div[7]/div[3]/div[1]/div[1]/div/div/div/div[1]/div[2]/img")->item(0);
+        $locationImg = $xpath->query("/html/body/div[1]/div[7]/div[6]/div/div[1]/div/div/div/div[1]/div[2]/img")->item(0);
 
         if(isset($locationImg) && !empty($locationImg)){
           $locationImg = $locationImg->attributes->getNamedItem('src')->nodeValue;

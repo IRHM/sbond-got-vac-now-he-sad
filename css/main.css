@@ -156,7 +156,7 @@ nav input.open{
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin: 15px 15%;
+  margin: 30px 15%;
 }
 
 .userHeadContainer .wrapper{

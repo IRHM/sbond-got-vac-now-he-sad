@@ -20,6 +20,17 @@
 
     <div class="noticeContainer" id="noticeContainer"></div>
 
+    <div id="startContent">
+      <div class="instructions">
+        <span>1. Click on the search button</span>
+        <span>2. Search for a Steam profile</span>
+        <span class="indented">
+          <span>- Profile URL</span>
+          <span>- SteamID64</span>
+        </span>
+      </div>
+    </div>
+
     <div id="mainContent" class="hidden">
       <div class="userHeadContainer">
         <div class="wrapper">

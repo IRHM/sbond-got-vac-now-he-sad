@@ -1,4 +1,5 @@
-var ui_main = document.getElementById("mainContent");
+var ui_mainContent = document.getElementById("mainContent");
+var ui_startContent = document.getElementById("startContent");
 var ui_avatar = document.getElementById("avatar");
 var ui_username = document.getElementById("username");
 var ui_desc = document.getElementById("desc");
@@ -160,7 +161,8 @@ async function drawProfileInfo(id) {
       }
 
       // Reset main divs to default states
-      ui_main.classList.remove("hidden");
+      ui_startContent.classList.add("hidden");
+      ui_mainContent.classList.remove("hidden");
       ui_counter.classList.remove("hidden");
       ui_noVac.classList.add("hidden");
 

@@ -154,6 +154,41 @@ nav input.open {
   font-size: 18px;
 }
 
+/*-- START ---*/
+
+#startContent {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  font-weight: bold;
+  font-size: 35px;
+  color: white;
+  transition: transform 250ms ease, font-size 250ms ease;
+}
+
+#startContent .instructions {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#startContent .instructions span {
+  width: 100%;
+}
+
+#startContent .instructions span.indented {
+  display: flex;
+  flex-flow: column;
+  padding: 5px;
+  margin-left: 80px;
+  font-weight: normal;
+  font-size: .8em;
+}
+
 /*-- USER CONTAINER ---*/
 
 .userHeadContainer {
@@ -284,6 +319,10 @@ nav input.open {
     width: 60%;
   }
 
+  #startContent {
+    transform: scale(0.9);
+  }
+
   /* USER */
   .userHeadContainer {
     margin: 15px 5%;
@@ -301,11 +340,29 @@ nav input.open {
     width: 250px;
   }
 
+  #startContent {
+    font-size: 25px;
+    transform: scale(1);
+  }
+
   /* COUNTER */
   .counterContainer .counter {
     display: flex;
     flex-wrap: wrap;
     flex-flow: column;
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  #startContent {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: start;
+  }
+
+  #startContent .instructions {
+    margin: 50px 0;
   }
 }
 

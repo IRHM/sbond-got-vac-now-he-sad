@@ -128,12 +128,14 @@ nav input {
   font-size: 1.2em;
   opacity: 0;
   transition: all 1s;
+  pointer-events: none;
 }
 
 nav input.open {
   opacity: 1;
   width: 250px;
   background-color: #00d754;
+  pointer-events: all;
 }
 
 /*--- NOTICE ---*/
